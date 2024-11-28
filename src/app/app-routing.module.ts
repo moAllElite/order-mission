@@ -5,6 +5,7 @@ import { DownloadOrderComponent } from './components/download-order/download-ord
 import { ListOrderComponent } from './components/list-order/list-order.component';
 
 const routes: Routes = [
+ // {path:'',redirectTo:'orders',pathMatch:'full'},
   { path: 'dashboards', component:DashboardsComponent },
   {path:'download/:numOdm',component:DownloadOrderComponent},
   {path:'orders',component:ListOrderComponent},

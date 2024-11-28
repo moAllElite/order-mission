@@ -17,7 +17,9 @@ import { DownloadOrderComponent } from './components/download-order/download-ord
 import { ListOrderComponent } from './components/list-order/list-order.component'; 
 import {MatDividerModule} from '@angular/material/divider'; 
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatSortModule } from '@angular/material/sort';
+import {  MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,10 +33,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
     MatDividerModule,
     MatPaginatorModule,
+    MatMenuModule,
     MatTableModule,
+    MatInputModule, 
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatIconModule,
+    MatSortModule, 
     BrowserAnimationsModule,
     MatCardModule,
     MatPaginatorModule,

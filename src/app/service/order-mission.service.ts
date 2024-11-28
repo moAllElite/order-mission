@@ -21,6 +21,6 @@ export class OrderMissionService {
 
   // filter order mission by
   getMissionOrderByOrderNumber(num_odm:string):Observable<OrdreMission>{
-    return this.http.get<OrdreMission>(this.Host + `ordre_mission?num_odm${num_odm}`);
+    return this.http.get<OrdreMission>(this.Host + `ordre_mission?num_odm=${num_odm}`);
   }
 }

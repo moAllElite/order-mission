@@ -13,43 +13,37 @@ import { style } from '@angular/animations';
 //pdf maker ressources
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-download-order',
   standalone: false,
-
   templateUrl: './download-order.component.html',
   styleUrl: './download-order.component.css'
 })
 export class DownloadOrderComponent {
+  numOdm:WritableSignal<string> =signal('');
   constructor(
-    protected pdfService: PdfService,
-    protected orderService:OrderMissionService
-  ) {}
-  order!:WritableSignal<OrdreMission>;
-  doc:any;
-
-  onGeneratePdf(){
-   /* this.pdfService.generateMissionOrderOnPdf(
-      'Mission Order',
-      10,
-      10
-    );*/
+    private pdfService: PdfService,
+    protected orderService:OrderMissionService,
+    readonly route:ActivatedRoute
+  ) {
+    this.numOdm.set(this.route.snapshot.params['numOdm']);
+    console.log(this.numOdm())
   }
+  order:any;
 
-     //pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
   //  generate a Mission Order's PDF following Order's number
-  generateDocWithPDFMaker(numOdm: string){
-    this.orderService.getMissionOrderByOrderNumber(numOdm)
+  generateDocWithPDFMaker(){
+    this.orderService.getMissionOrderByOrderNumber(this.numOdm())
     .subscribe(
       {
-        next: (data) => { this.order?.set(data)}
+        next: (data) => { this.order= data ;  console.log(data)}
       }
-    );
-    
-    this.doc = this.getDocDocument(this.order());
-    this.pdfService.generateMissionOrderWithPdfMaker(this.doc);
+    ); 
+
+    this.pdfService.generateOrdreMissionPdf(this.order);
   }
 
 
@@ -105,14 +99,5 @@ export class DownloadOrderComponent {
   }
 
 
-   // get Mission's Order by order number
-   getMissionOrder(numOdm:string){
-    this.orderService.getMissionOrderByOrderNumber(numOdm)
-    .subscribe(
-      {
-        next: (data) => { this.order.set(data)}
-      }
-    );
-   return this.order;
-  }
+   
 }
