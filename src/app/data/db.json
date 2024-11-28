@@ -1,0 +1,49 @@
+{
+  "ordre_mission": [
+    {
+      "id": 1,
+      "num_odm": "001",
+      "destination": "thiès",
+      "date_deb": "2024-10-20",
+      "date_fin": "2024-12-20",
+      "moyen_transport": "vehicule",
+      "salarie": "henni mouhamed",
+      "fonction": "directeur",
+      "direction":"Transport"
+    
+    },
+    {
+      "id": 2,
+      "num_odm": "002",
+      "destination": "diourbel",
+      "date_deb": "2024-01-08",
+      "date_fin": "2024-01-20",
+      "moyen_transport": "vehicule",
+      "salarie": "sarr mouhamed",
+      "fonction": "délégué",
+      "direction":"Transport"
+    },
+    {
+      "id": 3,
+      "num_odm": "003",
+      "destination": "Ziguinchor",
+      "date_deb": "2024-10-18",
+      "date_fin": "2024-10-30",
+      "moyen_transport": "avion",
+      "salarie": "Tidiane sy",
+      "fonction": "secretaire",
+      "direction":"DSI"
+    },
+    {
+      "id": 4,
+      "num_odm": "004",
+      "destination": "diourbel",
+      "date_deb": "2024-01-15",
+      "date_fin": "2024-01-26",
+      "moyen_transport": "vehicule",
+      "salarie": "sarr mouhamed",
+      "fonction": "agent maitrise",
+      "direction":"DRH"
+    }
+  ]
+}
