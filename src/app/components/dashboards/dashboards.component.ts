@@ -51,8 +51,8 @@ export class DashboardsComponent implements OnInit{
           data
           .map(
              o => {  
-               this.chartLabels.push(o.date_deb);
-               const missionDate = new Date(o.date_deb); // Ensure it's a Date object
+               this.chartLabels.push(o.dateDeb);
+               const missionDate = new Date(o.dateDeb); // Ensure it's a Date object
                this.chartLabels.push(missionDate);
        
                // Check if the date is within the last six months

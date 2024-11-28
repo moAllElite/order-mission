@@ -9,7 +9,7 @@ export class OrderMissionService {
 
   public Host : string ='http://localhost:3000/';
 
-  constructor(protected http: HttpClient,) { }
+  constructor(protected http: HttpClient) { }
   // fetch all data from mission order
 
   //get all data from order mission
@@ -20,5 +20,7 @@ export class OrderMissionService {
   }
 
   // filter order mission by
-
+  getMissionOrderByOrderNumber(num_odm:string):Observable<OrdreMission>{
+    return this.http.get<OrdreMission>(this.Host + `ordre_mission?num_odm${num_odm}`);
+  }
 }

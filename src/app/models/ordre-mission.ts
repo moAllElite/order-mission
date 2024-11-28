@@ -1,10 +1,10 @@
 export interface OrdreMission {
     id: number
-    num_odm: string
+    numOdm: string
     destination: string
-    date_deb: Date
-    date_fin: Date
-    moyen_transport: string
+    dateDeb: Date
+    dateFin: Date
+    moyenTransport: string
     salarie: string
     fonction : Fonction
     direction:Direction

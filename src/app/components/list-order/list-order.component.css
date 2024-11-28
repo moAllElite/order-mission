@@ -1,0 +1,43 @@
+.main{
+  padding: 16px 13px 16px 13px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+
+}
+.demo-table {
+  width: 100%;
+}
+ 
+.mat-column-id {
+  width: 5px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-demo-direction {
+  padding-left: 16px;
+  font-size: 20px;
+  max-width: 20px;
+  text-align: center;
+}
+
+.mat-column-demo-salarie{
+  font-style: italic;
+}
+
+.mat-column-demo-num_odm {
+  width: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.download-button-container {
+  display: flex;
+  justify-content: center;
+  width: 140px;
+}

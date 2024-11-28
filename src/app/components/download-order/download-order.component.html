@@ -3,8 +3,10 @@
     <mat-toolbar color="primary">
       PDF Generator with PDFMake
   </mat-toolbar>
-  
-  <button mat-raised-button color="primary" onclick="onGeneratePdf() " class="btn is-center">
+
+  <button mat-raised-button color="primary"
+      (click)="generateDocWithPDFMaker('002')"
+      class="btn is-center">
       Generate PDF
   </button>
   </mat-card>
