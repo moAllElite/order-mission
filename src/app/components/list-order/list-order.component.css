@@ -11,26 +11,40 @@
 .demo-table {
   max-width: 100%;
 }
- 
+
 .mat-column-id {
-  width: 5px;
+  max-width: 5px;
   border-right: 1px solid currentColor;
   padding-right: 24px;
   text-align: center;
 }
-
-.mat-column-demo-direction {
-  padding-left: 16px;
-  font-size: 20px;
-  max-width: 20px;
+.mat-column-dateDeb {
+  max-width: 160px;
   text-align: center;
 }
+.mat-column-dateFin {
+  max-width: 160px;
+  text-align: center;
+}
+.mat-column-telecharger {
+  text-align: center;
+}
+.mat-column-moyenTransport{
+  text-align: center;
+  max-width: 90px;
+}
+
+.mat-column-matricule{
+  text-align: center;
+  max-width: 100px;
+}
+
 
 .mat-column-demo-salarie{
   font-style: italic;
 }
 
-.mat-column-demo-num_odm {
+.mat-column-num_odm {
   width: 12px;
   text-align: center;
   font-weight: bold;

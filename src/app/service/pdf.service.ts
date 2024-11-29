@@ -1,68 +1,81 @@
 import { Injectable } from '@angular/core';
-
+import { jsPDF, } from "jspdf";
 import { OrdreMission } from '../models/ordre-mission';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts'; 
 
+import autoTable from 'jspdf-autotable';
 @Injectable({
   providedIn: 'root'
 })
 export class PdfService {
-  pdfMake: any;
-    constructor(){}
-    //load All Ressources
-    async loadPdfMaker() {
-      if (!this.pdfMake) {
-        const pdfMakeModule = await import('pdfmake/build/pdfmake');
-        const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
-        this.pdfMake = pdfMakeModule.default;
-        this.pdfMake.vfs = pdfFontsModule.default.pdfMake.vfs;
-      }
-    }
-   
- 
 
+    public generatePDF(order: any) {
+      const doc = new jsPDF();
 
-    
+      // Vérification et fallback pour les champs
+      const numOdm = order[0].num_odm || 'Numéro manquant';
+      const destination = order[0].destination || 'Destination inconnue';
+      const dateDeb = order[0].date_deb  || 'Date de début inconnue';
+      const dateFin = order[0].date_fin || 'Date de fin inconnue';
+      const moyenTransport = order[0].moyen_transport || 'Moyen de transport inconnu';
+      const salarie = order[0].salarie || 'Salarié inconnu';
+      const objet = order[0].objet_mission|| 'objet inconnue';
+      const direction = order[0].direction || 'Direction inconnue';
+      const itineraire = order[0].itineraire;
+      const matricule = order[0].matricule;
+      const unite = order[0].unite;
+       //font police
+       const ubuntuBold= 'public/fonts/Ubuntu-Bold.ttf' // load the *.ttf font file as binary string
 
-    generateOrdreMissionPdf(ordreMission: any) {
-      const documentDefinition = this.createDocumentDefinition(ordreMission);
-      pdfMake.createPdf(documentDefinition).open(); // Peut également être .download() ou .print()
-    }
+       // add the font to jsPDF
+      doc.addFileToVFS("Ubuntu-Bold.ttf", ubuntuBold);
+       doc.addFont("Ubuntu-Bold.ttf", "ubuntuBold", "bold");
+       doc.setFont("Ubuntu-Bold");
 
+      const ubuntuMedium = 'public/fonts/Ubuntu-Medium.ttf'
+       doc.addFileToVFS("Ubuntu-Medium.ttf", ubuntuMedium);
+       doc.addFont("Ubuntu-Medium.ttf", "ubuntuMedium", "normal");
+       doc.setFont("Ubuntu-Medium");
 
-    private createDocumentDefinition(ordreMission: OrdreMission):any {
-      return {
-        content: [
-          { text: 'Ordre de Mission', style: 'header' },
-        //  { text: `Numéro: ${ordreMission.numOdm}`, style: 'subheader' },
-          { text: `Destination: ${ordreMission.destination}`, style: 'content' },
-          { text: `Date début: ${ordreMission.dateDeb.toLocaleDateString()}` },
-          { text: `Date fin: ${ordreMission.dateFin.toLocaleDateString()}` },
-          { text: `Moyen de transport: ${ordreMission.moyenTransport}` },
-          { text: `Salarié: ${ordreMission.salarie}` },
-          { text: `Fonction: ${ordreMission.fonction}` },
-          { text: `Direction: ${ordreMission.direction}` },
+      //en tête
+      doc.setFontSize(13);
+      doc.text(`Direction ${direction}`,10,7);
+
+      // Titre
+      doc.setFontSize(20);
+      doc.text(`ORDRE DE MISSION N°${numOdm}`, 105, 20, { align: 'center' });
+
+      //Table nom | mat agent
+      autoTable(doc, {
+        head: [['Mle','Prénom et Nom', 'Email', 'Country']],
+        body: [
+          [`${matricule}`,`${salarie}`,`${matricule}`,  `${unite}`]
+          // ...
         ],
-        styles: {
-          header: {
-            fontSize: 18,
-            bold: true,
-            margin: [0, 0, 0, 10],
-          },
-          subheader: {
-            fontSize: 14,
-            bold: true,
-            margin: [0, 10, 0, 5],
-          },
-          content: {
-            fontSize: 12,
-            margin: [0, 5, 0, 5],
-          },
-        },
-      };
+      });
+
+
+
+      // Contenu
+
+      doc.text(`Sont autorisés à se rendre en mission à: ${destination}`, 10, 40 ).
+      setFont("Ubuntu-Medium")
+      .setFontSize(8);
+
+      doc.setFontSize(12);
+
+      doc.text(`Date Départ: ${dateDeb }`, 10, 50);
+      doc.text(`Retour prévu le : ${dateFin}`, 10, 60);
+      doc.text(`Moyen de transport : ${moyenTransport}`, 10, 70);
+      doc.text(`Itinéraire : ${itineraire}`, 10, 80);
+      doc.text(`Objet de la mission : ${objet}`, 10, 90);
+      doc.text(`Itinéraire : Sens inverse`, 10, 100);
+
+      // Téléchargement du PDF
+     doc
+      .save(`Ordre Mission  ${numOdm}.pdf`);
     }
-
-
 
 }
+
+
+

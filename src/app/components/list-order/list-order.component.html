@@ -1,7 +1,7 @@
 <div class="main">
 
   <mat-card class="card" appearance="outlined" >
-    
+
       <mat-card-header>
         <mat-card-title title-text-line-height class="is-title"  > Liste des ordres de missions  </mat-card-title>
       </mat-card-header>
@@ -12,8 +12,8 @@
             <mat-label>Filtrer</mat-label>
                 <input placeholder="Recherche"   matInput (change)="filterOrders($event)" >
           </mat-form-field>
-           
-           
+
+
           <!-- mission orders tables-->
           <table matSort  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -32,7 +32,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> N° ODM  </th>
               <td mat-cell *matCellDef="let element"> {{element.num_odm}} </td>
             </ng-container>
-            
+
             <!-- Employee's name -->
             <ng-container matColumnDef="salarie">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom de l'agent </th>
@@ -45,46 +45,46 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Destination </th>
               <td mat-cell *matCellDef="let element"> {{element.destination | titlecase}} </td>
             </ng-container>
-            
-            
+
+
             <!-- Debut date Column -->
             <ng-container matColumnDef="dateDeb">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de départ </th>
-              <td mat-cell *matCellDef="let element"> {{element.date_deb | date :'dd/MM/yyyy'}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.date_deb | date :'dd-MM-yyyy'}} </td>
             </ng-container>
             <!-- Ending date Column -->
             <ng-container matColumnDef="dateFin">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Date d'arrivée </th>
-              <td mat-cell *matCellDef="let element"> {{element.date_fin | date :'dd/MM/yyyy'}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.date_fin | date :'dd-MM-yyyy'}} </td>
             </ng-container>
-            
+
             <!-- transport -->
             <ng-container matColumnDef="moyenTransport"  >
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Moyen transport </th>
               <td mat-cell *matCellDef="let element"> {{element.moyen_transport  | titlecase}} </td>
             </ng-container>
-            
-            <!-- function -->
-            <ng-container matColumnDef="fonction" >
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Poste</th>
-              <td mat-cell *matCellDef="let element"> {{element.fonction | titlecase}} </td>
+
+            <!-- matricule -->
+            <ng-container matColumnDef="matricule" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Matricule</th>
+              <td mat-cell *matCellDef="let element"> {{element.matricule}} </td>
             </ng-container>
 
-            <!-- direction -->
-            <ng-container matColumnDef="direction"  >
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Direction </th>
-              <td mat-cell *matCellDef="let element"> {{element.direction}} </td>
+            <!-- statut -->
+            <ng-container matColumnDef="statut"  >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+              <td mat-cell *matCellDef="let element"> {{element.statut}} </td>
             </ng-container>
 
              <!-- download button -->
              <ng-container matColumnDef="telecharger">
               <th mat-header-cell *matHeaderCellDef> Télécharger</th>
-              <td mat-cell *matCellDef="let element"> 
+              <td mat-cell *matCellDef="let element">
                 <div class="download-button-container">
-                  <a mat-raised-button color="warn" 
-                  [routerLink]="['/download', element.num_odm]"
+                  <a  mat-mini-fab color="primary"
+                    (click)="generateDocWithPDFMaker(element.num_odm)"
                   aria-label="  button  download ">
-                    Télécharger
+                  <mat-icon>save_alt</mat-icon>
                   </a>
                 </div>
             </ng-container>
@@ -92,12 +92,12 @@
             <!-- table heads -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            
+
         </table>
-        
+
 
         <!-- PAGINATOR-->
-        
+
         <mat-paginator [pageSizeOptions]="[5, 10,15, 20,50,100]"
         showFirstLastButtons
         aria-label="Select page of periodic elements">

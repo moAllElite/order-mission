@@ -9,13 +9,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button'; 
+import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DownloadOrderComponent } from './components/download-order/download-order.component';
-import { ListOrderComponent } from './components/list-order/list-order.component'; 
-import {MatDividerModule} from '@angular/material/divider'; 
+import { ListOrderComponent } from './components/list-order/list-order.component';
+import {MatDividerModule} from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {  MatFormFieldModule } from '@angular/material/form-field';
@@ -23,8 +22,7 @@ import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardsComponent,
-    DownloadOrderComponent,
+    DashboardsComponent, 
     ListOrderComponent
   ],
   imports: [
@@ -35,14 +33,14 @@ import {MatInputModule} from '@angular/material/input';
     MatPaginatorModule,
     MatMenuModule,
     MatTableModule,
-    MatInputModule, 
+    MatInputModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatIconModule,
-    MatSortModule, 
+    MatSortModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatPaginatorModule,
@@ -51,7 +49,7 @@ import {MatInputModule} from '@angular/material/input';
   providers: [
     provideCharts(withDefaultRegisterables()),  // provider for charts dashboards
     provideAnimationsAsync(),
-    provideHttpClient(), // for http requests 
+    provideHttpClient(), // for http requests
   ], // for dashboards
   bootstrap: [AppComponent]
 })

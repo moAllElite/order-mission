@@ -8,6 +8,11 @@ export interface OrdreMission {
     salarie: string
     fonction : Fonction
     direction:Direction
+    matricule: string
+    unite: string
+    objet_mission: string
+    itineraire: string
+    statut: string
 }
 
 enum Fonction{

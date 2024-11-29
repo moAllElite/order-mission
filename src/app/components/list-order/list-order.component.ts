@@ -1,33 +1,35 @@
 import { AfterViewInit, Component, input, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
+import { PdfService } from '../../service/pdf.service';
 import { OrderMissionService } from '../../service/order-mission.service';
 import { OrdreMission } from '../../models/ordre-mission';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort,MatSortHeader } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import jsPDF from 'jspdf';
 @Component({
   selector: 'app-list-order',
   standalone: false,
-  
+
   templateUrl: './list-order.component.html',
   styleUrl: './list-order.component.css'
 })
 export class ListOrderComponent implements OnInit {
 
-  constructor(protected orderService: OrderMissionService){}
-  
+  constructor(public orderService: OrderMissionService, public pdfService: PdfService,){}
+
   // params for tables
   orders:WritableSignal<OrdreMission[] >= signal([]) ;
-  @ViewChild(MatPaginator) paginator!: MatPaginator; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   public dataSource:any ;
-
-  public displayedColumns :string[]= [  'id',  'numOdm','destination','dateDeb',    
-  'dateFin' ,    'moyenTransport' ,    'salarie' , 'fonction'  , 'direction','telecharger'
+  public order! :OrdreMission[];
+  public displayedColumns :string[]= [  'id',  'numOdm','destination','dateDeb',
+  'dateFin' ,    'moyenTransport' ,    'salarie' , 'statut'  , 'matricule','telecharger'
   ];
-  
- 
+
+
 
   // assign the orders list to the table on page Init
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class ListOrderComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }
     );
-     
+
   }
 
 
@@ -49,7 +51,27 @@ export class ListOrderComponent implements OnInit {
      let value = (event.target as HTMLInputElement ) .value; // zone de texte de type   HTMLInputElement
       this.dataSource.filter = value;
   }
-   
+
+  //  generate a this.orders Order's PDF following Order's number
+  public generateDocWithPDFMaker(num:any){
+    //console.log(num)
+    this.orderService.getMissionOrderByOrderNumber(num)
+    .subscribe(
+      {
+        next : (data:OrdreMission[])=>{
+          this.order = data;
+        setTimeout(
+          () => {
+            this.pdfService.generatePDF(this.order)
+          },200
+        )
+        },
+      }
+
+    )
+
+
+    }
 
 
 }
