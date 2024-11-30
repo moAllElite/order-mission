@@ -3,7 +3,7 @@
   <mat-card class="card" appearance="outlined" >
 
       <mat-card-header>
-        <mat-card-title title-text-line-height class="is-title"  > Liste des ordres de missions  </mat-card-title>
+        <mat-card-title class="is-title"  > Liste des ordres de missions  </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
       <mat-card-content>
@@ -81,7 +81,7 @@
               <th mat-header-cell *matHeaderCellDef> Télécharger</th>
               <td mat-cell *matCellDef="let element">
                 <div class="download-button-container">
-                  <a  mat-mini-fab color="primary"
+                  <a  mat-mini-fab color="warn"
                     (click)="generateDocWithPDFMaker(element.num_odm)"
                   aria-label="  button  download ">
                   <mat-icon>save_alt</mat-icon>

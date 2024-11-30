@@ -19,15 +19,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {  MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatSidenavModule} from '@angular/material/sidenav';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardsComponent, 
+    DashboardsComponent,
     ListOrderComponent
   ],
   imports: [
     BrowserModule,
-     MatToolbarModule,
+    MatToolbarModule,
     MatButtonModule,
     MatDividerModule,
     MatPaginatorModule,
@@ -44,7 +45,8 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatCardModule,
     MatPaginatorModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSidenavModule
   ],
   providers: [
     provideCharts(withDefaultRegisterables()),  // provider for charts dashboards
