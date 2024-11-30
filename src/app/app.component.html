@@ -1,32 +1,29 @@
 
 <!-- toolbar & navbar-->
-<mat-toolbar   color="secondary" >
-  <button mat-icon-button class="example-icon"    color="secondary"
-          (click)="drawer.toggle()"
+<mat-toolbar  color="warn" >
+  <button mat-icon-button class="mat-elevation-z3"
+          color="primary"
+          (click)="collapsed.set(!collapsed())"
           aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+    <mat-icon  class="icon">menu</mat-icon>
   </button>
-  <span>Gestion des ordres de mission</span>
-  <span class="example-spacer"></span>
-
+  <span routerLink="/orders">Gestion ordres mission</span>
 
 </mat-toolbar>
 <!-- end toolbar -->
 
 <!-- SIDENAV-->
-<mat-drawer-container class="example-container" autosize >
-  <mat-drawer #drawer class="example-sidenav" mode="side" opened="opened"  >
-    <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
-    <mat-sidenav-container  >
-      <mat-sidenav>Start</mat-sidenav>
-      <mat-sidenav-content  class="container" >
-        <!-- content-->
-          <router-outlet></router-outlet>
-        <!-- content -->
-      </mat-sidenav-content>
-    </mat-sidenav-container>
 
-  </mat-drawer>
-</mat-drawer-container>
 
+<!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+<mat-sidenav-container   opened  container-background-color="primary">
+  <mat-sidenav  mode="side"  opened [style.width]="sideNavWidth()"      >
+    <app-custom-sidebar [collapsed]="collapsed()"></app-custom-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content  class="content" [style.margin-left]="sideNavWidth()"  >
+    <!-- content-->
+      <router-outlet></router-outlet>
+    <!-- content -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
 

@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, input, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
-import { PdfService } from '../../service/pdf.service';
-import { OrderMissionService } from '../../service/order-mission.service';
-import { OrdreMission } from '../../models/ordre-mission';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort,MatSortHeader } from '@angular/material/sort';
-import { MatInputModule } from '@angular/material/input';
-import jsPDF from 'jspdf';
+import {Component, OnInit, signal, ViewChild, WritableSignal} from '@angular/core';
+import {PdfService} from '../../service/pdf.service';
+import {OrderMissionService} from '../../service/order-mission.service';
+import {OrdreMission} from '../../models/ordre-mission';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
 @Component({
   selector: 'app-list-order',
   standalone: false,
@@ -25,8 +24,8 @@ export class ListOrderComponent implements OnInit {
 
   public dataSource:any ;
   public order! :OrdreMission[];
-  public displayedColumns :string[]= [  'id',  'numOdm','destination','dateDeb',
-  'dateFin' ,    'moyenTransport' ,    'salarie' , 'statut'  , 'matricule','telecharger'
+  public displayedColumns :string[]= [  'id',  'numOdm','destination','date_deb',
+  'date_fin' ,    'moyen_transport' ,    'salarie' , 'statut'  , 'matricule','telecharger'
   ];
 
 
@@ -48,8 +47,8 @@ export class ListOrderComponent implements OnInit {
 
   // Filter orders by
   filterOrders(event: Event) {
-     let value = (event.target as HTMLInputElement ) .value; // zone de texte de type   HTMLInputElement
-      this.dataSource.filter = value;
+      // zone de texte de type   HTMLInputElement
+    this.dataSource.filter = (event.target as HTMLInputElement).value;
   }
 
   //  generate a this.orders Order's PDF following Order's number

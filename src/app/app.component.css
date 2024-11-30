@@ -12,6 +12,18 @@ mat-sidenav-container{
   height: calc(100vh - 64px);
 }
 
-.container{
-  padding: 24px;
+.content {
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.icon{
+  color: #8f0045;
+}
+
+.example-sidenav {
+  width: 250px;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, computed, signal, WritableSignal} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'order-mission';
+
+  collapsed:WritableSignal<boolean> = signal(false); // burger button state manager
+
+  sideNavWidth = computed(() => this.collapsed() ? '65px':'250px');
 }

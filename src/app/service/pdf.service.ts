@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { jsPDF, } from "jspdf";
-import { OrdreMission } from '../models/ordre-mission';
 
 import autoTable from 'jspdf-autotable';
 @Injectable({
@@ -9,7 +8,7 @@ import autoTable from 'jspdf-autotable';
 export class PdfService {
 
     public generatePDF(order: any) {
-      const doc = new jsPDF();
+      const doc :jsPDF= new jsPDF("p", "mm", "a4");
 
       // Vérification et fallback pour les champs
       const numOdm = order[0].num_odm || 'Numéro manquant';
@@ -38,37 +37,42 @@ export class PdfService {
 
       //en tête
       doc.setFontSize(13);
-      doc.text(`Direction ${direction}`,10,7);
+      doc.text(`Direction ${direction}`,10,7)
+        .setFont("Ubuntu-Bold");
 
       // Titre
       doc.setFontSize(20);
-      doc.text(`ORDRE DE MISSION N°${numOdm}`, 105, 20, { align: 'center' });
+      doc.text(`ORDRE DE MISSION `, 105, 30, { align: 'center' });
+      doc.text(`N°${numOdm}`, 105, 38, { align: 'center' });
 
       //Table nom | mat agent
       autoTable(doc, {
-        head: [['Mle','Prénom et Nom', 'Email', 'Country']],
+        head: [['N°','Prénom et Nom', 'Mle', 'Unité']],
         body: [
-          [`${matricule}`,`${salarie}`,`${matricule}`,  `${unite}`]
+          [`1`,`${salarie}`,`${matricule}`,  `${unite}`]
           // ...
         ],
+        margin: { top: 48, left: 10, bottom: 35 },
+        theme:'grid',
+        tableWidth: 190,
       });
 
 
 
       // Contenu
 
-      doc.text(`Sont autorisés à se rendre en mission à: ${destination}`, 10, 40 ).
-      setFont("Ubuntu-Medium")
-      .setFontSize(8);
+      doc.text(`Sont autorisés à se rendre en mission à: ${destination}`, 10, 78 ).
+        // .setFont("Ubuntu-Medium")
+      setFontSize(13);
 
       doc.setFontSize(12);
 
-      doc.text(`Date Départ: ${dateDeb }`, 10, 50);
-      doc.text(`Retour prévu le : ${dateFin}`, 10, 60);
-      doc.text(`Moyen de transport : ${moyenTransport}`, 10, 70);
-      doc.text(`Itinéraire : ${itineraire}`, 10, 80);
-      doc.text(`Objet de la mission : ${objet}`, 10, 90);
-      doc.text(`Itinéraire : Sens inverse`, 10, 100);
+      doc.text(`Date Départ: ${dateDeb }`, 10, 95);
+      doc.text(`Retour prévu le : ${dateFin}`, 10, 105);
+      doc.text(`Moyen de transport : ${moyenTransport}`, 10, 115);
+      doc.text(`Itinéraire : ${itineraire}`, 10, 125);
+      doc.text(`Objet de la mission : ${objet}`, 10, 135);
+      doc.text(`Itinéraire : Sens inverse`, 10, 145);
 
       // Téléchargement du PDF
      doc

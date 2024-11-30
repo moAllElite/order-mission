@@ -1,9 +1,5 @@
 .main{
-  padding: 0 13px 16px 13px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 15px 40px 0 40px;
 }
 .card{
 
@@ -18,18 +14,18 @@
   padding-right: 24px;
   text-align: center;
 }
-.mat-column-dateDeb {
+.mat-column-date_deb {
   max-width: 160px;
   text-align: center;
 }
-.mat-column-dateFin {
+.mat-column-date_fin {
   max-width: 160px;
   text-align: center;
 }
 .mat-column-telecharger {
   text-align: center;
 }
-.mat-column-moyenTransport{
+.mat-column-moyen_transport{
   text-align: center;
   max-width: 90px;
 }

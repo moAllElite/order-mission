@@ -20,15 +20,19 @@ import { MatSortModule } from '@angular/material/sort';
 import {  MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatSidenavModule} from '@angular/material/sidenav';
+import { CustomSidebarComponent } from './components/custom-sidebar/custom-sidebar.component';
+import { MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardsComponent,
-    ListOrderComponent
+    ListOrderComponent,
+    CustomSidebarComponent
   ],
   imports: [
     BrowserModule,
     MatToolbarModule,
+    MatMenuModule,
     MatButtonModule,
     MatDividerModule,
     MatPaginatorModule,
@@ -46,6 +50,7 @@ import { MatSidenavModule} from '@angular/material/sidenav';
     MatCardModule,
     MatPaginatorModule,
     AppRoutingModule,
+    MatListModule,
     MatSidenavModule
   ],
   providers: [

@@ -1,5 +1,4 @@
 <div class="main">
-
   <mat-card class="card" appearance="outlined" >
 
       <mat-card-header>
@@ -48,18 +47,18 @@
 
 
             <!-- Debut date Column -->
-            <ng-container matColumnDef="dateDeb">
+            <ng-container matColumnDef="date_deb">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de départ </th>
               <td mat-cell *matCellDef="let element"> {{element.date_deb | date :'dd-MM-yyyy'}} </td>
             </ng-container>
             <!-- Ending date Column -->
-            <ng-container matColumnDef="dateFin">
+            <ng-container matColumnDef="date_fin">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Date d'arrivée </th>
               <td mat-cell *matCellDef="let element"> {{element.date_fin | date :'dd-MM-yyyy'}} </td>
             </ng-container>
 
             <!-- transport -->
-            <ng-container matColumnDef="moyenTransport"  >
+            <ng-container matColumnDef="moyen_transport"  >
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Moyen transport </th>
               <td mat-cell *matCellDef="let element"> {{element.moyen_transport  | titlecase}} </td>
             </ng-container>
@@ -81,7 +80,7 @@
               <th mat-header-cell *matHeaderCellDef> Télécharger</th>
               <td mat-cell *matCellDef="let element">
                 <div class="download-button-container">
-                  <a  mat-mini-fab color="warn"
+                  <a  mat-mini-fab color="secondary"
                     (click)="generateDocWithPDFMaker(element.num_odm)"
                   aria-label="  button  download ">
                   <mat-icon>save_alt</mat-icon>

@@ -5,7 +5,7 @@ import { ListOrderComponent } from './components/list-order/list-order.component
 
 const routes: Routes = [
  // {path:'',redirectTo:'orders',pathMatch:'full'},
-  { path: 'dashboards', component:DashboardsComponent },
+  { path: 'analytics', component:DashboardsComponent },
   {path:'orders',component:ListOrderComponent},
 ];
 

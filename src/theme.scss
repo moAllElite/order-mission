@@ -1,6 +1,6 @@
-@use '@angular/material' as mat;
 
-$theme: mat.define-theme(
+@use '@angular/material' as mat;
+ $theme: mat.define-theme(
     (
       color: (
         theme-type: light,
@@ -10,8 +10,6 @@ $theme: mat.define-theme(
     )
 );
 
-@include mat.core();
-@include mat.color-variants-backwards-compatibility($theme);
 
 @mixin theme($theme) {
   app-navbar {
@@ -23,7 +21,15 @@ $theme: mat.define-theme(
   }
 }
 
+
 :root {
   @include mat.all-component-themes($theme);
-  @include theme($theme);
+ @include theme($theme);
+  mat-toolbar {
+    --mat-sys-on-primary-fixed-variant: #8f0045;
+    --mat-toolbar-container-background-color:  #ffd9e1;
+    --mat-toolbar-container-text-color: var(--mat-sys-primary);
+
+  }
+
 }
