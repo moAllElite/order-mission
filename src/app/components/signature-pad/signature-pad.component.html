@@ -1,0 +1,18 @@
+<canvas
+  #canvas
+  (touchstart)="startDrawing($event)"
+  (touchmove)="moved($event)"
+  width="700"
+  height="200"
+></canvas>
+
+
+<button mat-flat-button color="secondary" (click)="openDialog('1500ms', '1000ms')">Enregistrer</button>
+<button mat-stroked-button color="warn" (click)="clearPad()">Effacer</button>
+<p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
+<div *ngIf="!signatureNeeded">
+  <p>Signature in Base64Encoded Format</p>
+
+</div>
+
+
