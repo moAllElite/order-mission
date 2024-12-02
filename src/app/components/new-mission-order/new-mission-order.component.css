@@ -1,0 +1,40 @@
+.container{
+  align-items: center;
+}
+
+.card{
+  padding: 0 0 0 1.2em ;
+  margin: 3em  0 0 0;
+}
+.is-center{
+  display: flex;
+  justify-content: center;
+}
+is-text-centered{
+  text-align: center;
+}
+.dates-form-field {
+  margin: 0  50px 0 50px;
+}
+
+.example-container mat-form-field + mat-form-field {
+  margin: 15px 20px 10px 45px;
+}
+.status{
+  display: none;
+}
+.objet-textarea{
+  width: 28.5%;
+}
+
+/**
+* button colors custom
+*/
+.btn-actions{
+  display: flex;
+  justify-content: center;
+}
+.my-colors {
+  --mdc-protected-button-label-text-color: red;
+  --mdc-protected-button-container-color: blue;
+}

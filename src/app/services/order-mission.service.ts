@@ -16,11 +16,11 @@ export class OrderMissionService {
 
   public loadOrdersMissions() : Observable<OrdreMission[]>{
       return this.http
-      .get<OrdreMission[]>(this.Host + 'ordre_mission');
+      .get<OrdreMission[]>(this.Host + 'ordre_missions');
   }
 
   // filter order mission by
   public getMissionOrderByOrderNumber(num_odm:string):Observable<OrdreMission[]>{
-    return this.http.get<OrdreMission[]>(this.Host + `ordre_mission?num_odm=${num_odm}`);
+    return this.http.get<OrdreMission[]>(this.Host + `ordre_missions?num_odm=${num_odm}`);
   }
 }

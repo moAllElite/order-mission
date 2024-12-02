@@ -1,6 +1,6 @@
 import {Component, OnInit, signal, ViewChild, WritableSignal} from '@angular/core';
-import {PdfService} from '../../service/pdf.service';
-import {OrderMissionService} from '../../service/order-mission.service';
+import {PdfService} from '../../services/pdf.service';
+import {OrderMissionService} from '../../services/order-mission.service';
 import {OrdreMission} from '../../models/ordre-mission';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';

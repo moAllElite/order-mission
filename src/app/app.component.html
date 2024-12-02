@@ -1,8 +1,7 @@
-
 <!-- toolbar & navbar-->
-<mat-toolbar  color="warn" >
+<mat-toolbar  color="secondary">
   <button mat-icon-button class="mat-elevation-z3"
-          color="primary"
+          color="warn"
           (click)="collapsed.set(!collapsed())"
           aria-label="Example icon-button with menu icon">
     <mat-icon  class="icon">menu</mat-icon>
@@ -16,7 +15,7 @@
 
 
 <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
-<mat-sidenav-container   opened  container-background-color="primary">
+<mat-sidenav-container   opened  >
   <mat-sidenav  mode="side"  opened [style.width]="sideNavWidth()"      >
     <app-custom-sidebar [collapsed]="collapsed()"></app-custom-sidebar>
   </mat-sidenav>

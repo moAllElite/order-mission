@@ -11,5 +11,5 @@ export class AppComponent {
 
   collapsed:WritableSignal<boolean> = signal(false); // burger button state manager
 
-  sideNavWidth = computed(() => this.collapsed() ? '65px':'250px');
+  sideNavWidth = computed(() => this.collapsed() ? '75px':'250px');
 }
