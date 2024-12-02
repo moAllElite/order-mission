@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { OrdreMission } from '../models/ordre-mission';
 import { Observable } from 'rxjs';
+import {FormGroup} from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,4 +24,17 @@ export class OrderMissionService {
   public getMissionOrderByOrderNumber(num_odm:string):Observable<OrdreMission[]>{
     return this.http.get<OrdreMission[]>(this.Host + `ordre_missions?num_odm=${num_odm}`);
   }
+
+  /**
+   *  POST Method endpoint http://localhost:3000/ordre_missions
+   *  Save new mission
+   */
+  public saveMissionOrder(order: OrdreMission | null):Observable<OrdreMission>{
+    return this.http
+      .post<OrdreMission>(
+        this.Host + 'ordre_missions',
+        order
+      );
+  }
+
 }

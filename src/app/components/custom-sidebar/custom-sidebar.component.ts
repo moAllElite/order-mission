@@ -7,7 +7,6 @@ export type  MenuItem = {
 @Component({
   selector: 'app-custom-sidebar',
   standalone: false,
-
   templateUrl: './custom-sidebar.component.html',
   styleUrl: './custom-sidebar.component.css'
 })

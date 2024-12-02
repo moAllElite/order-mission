@@ -14,6 +14,7 @@ import {SignatureDialogComponent} from '../signature-dialog/signature-dialog.com
 @Component({
   selector: 'app-signature-pad',
   standalone: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './signature-pad.component.html',
   styleUrl: './signature-pad.component.css'
@@ -60,7 +61,7 @@ export class SignaturePadComponent  implements OnInit, AfterViewInit{
       enterAnimationDuration,
       exitAnimationDuration,
     });
-    
+
   }
 
 

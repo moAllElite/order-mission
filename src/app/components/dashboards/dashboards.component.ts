@@ -2,17 +2,12 @@ import { Component, OnInit, signal, Signal, WritableSignal } from '@angular/core
 import { BaseChartDirective } from 'ng2-charts'; // for dashboards
 import { OrderMissionService } from '../../services/order-mission.service';
 import { OrdreMission } from '../../models/ordre-mission';
-import { Observable } from 'rxjs';
 import { Chart, registerables } from 'chart.js';
-import { MatCard } from '@angular/material/card';
-import { A11yModule } from '@angular/cdk/a11y';
-
 Chart.register(... registerables) // for charts
 
 @Component({
   selector: 'app-dashboards',
   standalone: false,
-
   templateUrl: './dashboards.component.html',
   styleUrl: './dashboards.component.css'
 })

@@ -27,17 +27,20 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {CustomSidebarComponent} from './components/custom-sidebar/custom-sidebar.component';
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardsComponent,
     ListOrderComponent,
     NewMissionOrderComponent,
-    //CustomSidebarComponent
+    CustomSidebarComponent
   ],
   imports: [
     BrowserModule,
     MatPaginatorModule,
+    MatStepperModule,
     MatToolbarModule,
     MatNativeDateModule ,
     ReactiveFormsModule,

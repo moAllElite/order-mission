@@ -1,26 +1,20 @@
-import { Component, computed, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import {Component, computed, inject, OnInit, Signal, signal, WritableSignal} from '@angular/core';
 import { Employee } from '../../models/employee';
 import {map, startWith} from 'rxjs/operators';
-import {AsyncPipe} from '@angular/common';
 import { EmployeeService } from '../../services/employee.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable } from 'rxjs';
+import {OrdreMission} from '../../models/ordre-mission';
+import {OrderMissionService} from '../../services/order-mission.service';
 @Component({
   selector: 'app-new-mission-order',
   standalone: false,
-
   templateUrl: './new-mission-order.component.html',
   styleUrl: './new-mission-order.component.css'
 })
 export class NewMissionOrderComponent implements OnInit {
-
-  constructor(protected employeeService:EmployeeService){} // inject employee service
-
-  currentMatricule:WritableSignal<string> = signal('');
-
-  agentsInfo!:WritableSignal<Employee>;
-  datedebpicker!:WritableSignal<Date> ;
-  datefinpicker!:WritableSignal<Date> ;
+  isLinear:WritableSignal<boolean> = signal(false);
+  constructor(protected employeeService:EmployeeService,private  orderService:OrderMissionService){} // inject employee service
   matricule:string='';
   currentUnity:WritableSignal<string> = signal('')
   currentDirection : WritableSignal<string> = signal('');
@@ -28,23 +22,38 @@ export class NewMissionOrderComponent implements OnInit {
 
   matriculeControl = new FormControl<string | Employee>('');
 
-  unityControl =  new FormControl<string | Employee>('');
-  directionControl = new FormControl<string | Employee>('');
-  functionControl = new FormControl<string | Employee>('');
-  unity!:Signal<any>;
-  formGroup = new FormGroup(
-    {
-      matricule:this.matriculeControl,
-      destination: new FormControl(''),
-      itineaire: new FormControl(''),
-      datedeb:new FormControl(''),
-      datefin: new FormControl(''),
-      unite: this.unityControl,
-      fontion:this.functionControl,
-      direction:this.directionControl,
-      objetMission:new FormControl('')
-    }
-  );
+  unityControl:FormControl =  new FormControl<string | Employee>('',[Validators.required]);
+  directionControl:FormControl = new FormControl<string | Employee>('',[Validators.required]);
+  functionControl:FormControl = new FormControl<string | Employee>('',[Validators.required]);
+  public _formBuilder = inject(FormBuilder);
+  infoSalarieFormGroup = this._formBuilder.group({
+    salarie:this.matriculeControl,
+    unite: this.unityControl,
+    fontion:this.functionControl,
+    direction:this.directionControl,
+    objet_mission:new FormControl('',[Validators.required]),
+  });
+  infoTrajetFormGroup = this._formBuilder.group({
+    destination: new FormControl('',[Validators.required]),
+    date_deb: new FormControl<Date | null>(null,[Validators.required]),
+    date_fin: new FormControl<Date | null>(null,[Validators.required]),
+    itineraire: new FormControl('',[Validators.required]),
+    moyen_transport:new FormControl('',[Validators.required]),
+    statut:new FormControl('En attente',[Validators.required])
+  });
+
+  formGroup:FormGroup =  this._formBuilder.group(
+    ({
+      salarie: this.matriculeControl, unite: this.unityControl, fonction: this.functionControl,
+      direction: this.directionControl,
+      objet_mission: new FormControl('', [Validators.required]),
+      destination: new FormControl('', [Validators.required]),
+      date_deb: new FormControl<Date | null>(null, [Validators.required]),
+      date_fin: new FormControl<Date | null>(null, [Validators.required]),
+      itineraire: new FormControl('', [Validators.required]),
+      moyen_transport: new FormControl('', [Validators.required]),
+      statut: new FormControl('En attente', [Validators.required])
+    }  ));
   //for autocomplete matricule
   options:WritableSignal<Employee[]>=signal([]);
   filteredOptions!: Observable<Employee[]>;
@@ -96,20 +105,26 @@ export class NewMissionOrderComponent implements OnInit {
     return user && user.matricule ? user.matricule : '';
   }
 
-  /**on matricule field loose focus we load employee informations
-   *  @return Unity
-   *  @return function
-   *  @return Direction
-   * */
 
+  order:WritableSignal<OrdreMission | null> = signal(null) ;
 
-
+  // save new order mission
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.formGroup.value);
+    console.log(this.formGroup.value);
+    const  result = this.formGroup.value;
+    if (this.formGroup.valid) {
+      this.order.set(this.formGroup.value);
+      console.log(this.formGroup.value);
+
+      this.orderService.saveMissionOrder(this.order()).subscribe({
+        next: (value) => alert(JSON.stringify(value)),
+        error: (err) => alert(err)
+      });
+    } else {
+      alert('Form is invalid'+ this.formGroup.errors);
+    }
+
   }
-
-
 
 
 
