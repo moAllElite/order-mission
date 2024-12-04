@@ -32,6 +32,7 @@ export class NewMissionOrderComponent implements OnInit {
   formGroup:FormGroup =  this._formBuilder.group(
     ({
       salarie: this.matriculeControl,
+      num_odm: this.numOdmControl,
       objet_mission: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required]),
       date_deb: new FormControl<Date | null>(null, [Validators.required]),
@@ -39,7 +40,6 @@ export class NewMissionOrderComponent implements OnInit {
       itineraire: new FormControl('', [Validators.required]),
       moyen_transport: new FormControl('', [Validators.required]),
       statut: new FormControl('En attente', [Validators.required]),
-      num_odm: this.numOdmControl
     }  ));
   //for autocomplete matricule
   options:WritableSignal<Employee[]>=signal([]);
@@ -98,11 +98,14 @@ export class NewMissionOrderComponent implements OnInit {
   // save new order mission
   onSubmit() {
     console.log(this.formGroup.value);
+    // Vérifiez que le numéro ODM est bien généré
+    
     const  result = this.formGroup.value;
+    this.numOdmControl.setValue(this.currentOdm());
+    this.formGroup.controls['num_odm'].setValue(this.currentOdm());
+    this.order.set(this.formGroup.value);
     if (this.formGroup.valid) {
-      this.order.set(this.formGroup.value);
-      console.log(this.formGroup.value);
-
+  
       this.orderService.saveMissionOrder(this.order()).subscribe({
         next: (value) => {
           alert(JSON.stringify(value));
@@ -115,10 +118,15 @@ export class NewMissionOrderComponent implements OnInit {
     }
 
   }
-
-
-  setOdmNumber() {
+  
+  currentOdm:WritableSignal<string> =signal('');
+  public setOdmNumber( ) {
+     
     const value:Date =this.formGroup.controls['date_deb'].value;
-    this.numOdmControl.setValue(`${value.getMonth()-value.getFullYear()}`);
+    console.log('hey'+value.getMonth())
+    const result:string=value.getMonth().toLocaleString();
+    console.log('year:'+value.getFullYear())
+    this.currentOdm.set(value.getMonth().toLocaleString()+'-'+value.getFullYear().toLocaleString());
+    console.log(this.currentOdm())
   }
 }

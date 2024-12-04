@@ -5,60 +5,63 @@
   <h1 class="title-upper is-text-centered">Ajouter une demande de mission</h1>
 </div>
 <mat-stepper orientation="vertical" [linear]="isLinear()" #stepper>
-  <mat-step [stepControl]=" formGroup">
-    <form [formGroup]=" formGroup">
-      <div class="example-container">
-
-        <mat-form-field  >
-          <mat-label>Matricule</mat-label>
-          <input matInput
-                 type="text" [formControl]="matriculeControl"
-                 required
-                 [matAutocomplete]="auto"
-                 placeholder="Matricule agent">
-          <mat-icon matSuffix>person</mat-icon>
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            @for (option of filteredOptions | async; track option) {
-              <mat-option [value]="option">{{option.matricule}}</mat-option>
-            }
-          </mat-autocomplete>
-        </mat-form-field>
-        <!-- unite -->
-        <mat-form-field  >
-          <mat-label>Entre l'unité</mat-label>
-          <input matInput placeholder="Unite placeholder"
-                 [formControl]="unityControl"
-                 required />
-          <mat-icon matSuffix> category</mat-icon>
-        </mat-form-field>
-
-        <!--fonction-->
-        <mat-form-field >
-          <mat-label>Entre la fonction </mat-label>
-          <input matInput placeholder="Fonction placeholder"
-                 [formControl]="functionControl"
-                 readonly
-          />
-          <mat-icon matSuffix>beenhere</mat-icon>
-        </mat-form-field>
-
-      </div>
-      <div class="example-container">
-        <!--direction-->
-        <mat-form-field >
-          <mat-label>Entre la direction </mat-label>
-          <input matInput placeholder="Direction placeholder"
-                 [formControl]="directionControl"
-                 readonly />
-          <mat-icon matSuffix> compass_calibration</mat-icon>
-        </mat-form-field>
-        <mat-form-field class="objet-textarea">
-          <mat-label>Objet de la mission</mat-label>
-          <textarea matInput placeholder="L'objet de la demande" formControlName="objet_mission"></textarea>
-        </mat-form-field>
-      </div>
-    </form>
-  </mat-step>
+  <mat-card>
+    <mat-card-content>
+      <mat-step [stepControl]=" formGroup">
+        <form [formGroup]=" formGroup">
+          <div class="step-one">
+            <mat-form-field  >
+              <mat-label>Matricule</mat-label>
+              <input matInput
+                     type="text" [formControl]="matriculeControl"
+                     required
+                     [matAutocomplete]="auto"
+                     placeholder="Matricule agent">
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                @for (option of filteredOptions | async; track option) {
+                  <mat-option [value]="option">{{option.matricule}}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+            <!-- unite -->
+            <mat-form-field  >
+              <mat-label>Entre l'unité</mat-label>
+              <input matInput placeholder="Unite placeholder"
+                     [formControl]="unityControl"
+                     required />
+              <mat-icon matSuffix> category</mat-icon>
+            </mat-form-field>
+    
+            <!--fonction-->
+            <mat-form-field >
+              <mat-label>Entre la fonction </mat-label>
+              <input matInput placeholder="Fonction placeholder"
+                     [formControl]="functionControl"
+                     readonly
+              />
+              <mat-icon matSuffix>beenhere</mat-icon>
+            </mat-form-field>
+    
+          </div>
+          <div class="example-container">
+            <!--direction-->
+            <mat-form-field >
+              <mat-label>Entre la direction </mat-label>
+              <input matInput placeholder="Direction placeholder"
+                     [formControl]="directionControl"
+                     readonly />
+              <mat-icon matSuffix> compass_calibration</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="objet-textarea">
+              <mat-label>Objet de la mission</mat-label>
+              <textarea matInput placeholder="L'objet de la demande" formControlName="objet_mission"></textarea>
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-step>
+    </mat-card-content>
+  </mat-card>
   <mat-step [stepControl]="formGroup">
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="example-container" >
@@ -83,14 +86,15 @@
         <mat-form-field>
           <mat-label>Entrer les dates</mat-label>
           <mat-date-range-input   [rangePicker]="picker">
-            <input matStartDate formControlName="date_deb" placeholder="Départ">
-            <input matEndDate formControlName="date_fin" placeholder="Retour" (dateChange)="setOdmNumber()">
+            <input matStartDate formControlName="date_deb" placeholder="Départ" 
+             (dateInput)="setOdmNumber()">
+            <input matEndDate formControlName="date_fin" placeholder="Retour" >
           </mat-date-range-input>
           <mat-hint>
             @if (formGroup.controls['date_fin'].value && formGroup.controls['date_deb'].value){
-              <p>Date de départ :  {{formGroup.controls['date_deb'].value | date :'dd-MM-yyyy'}}.
-                <br/> Retour prévu: {{formGroup.controls['date_fin'].value | date :'dd-MM-yyyy'}}. </p>
-            }
+              Date de départ :  {{formGroup.controls['date_deb'].value | date :'dd-MM-yyyy'}}.<br/>
+              Retour prévu: {{formGroup.controls['date_fin'].value | date :'dd-MM-yyyy'}}. 
+            }@else{ MM/DD/YYYY – MM/DD/YYYY            }
           </mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
@@ -104,7 +108,7 @@
         </mat-form-field>
         <!-- moyen de transport -->
         <mat-form-field  >
-          <mat-label>Entre l'itinéraire</mat-label>
+          <mat-label>Moyen de transport</mat-label>
           <input matInput placeholder="Moyen de transport" type="text"  formControlName="moyen_transport">
           <mat-icon matSuffix>directions_car</mat-icon>
         </mat-form-field>

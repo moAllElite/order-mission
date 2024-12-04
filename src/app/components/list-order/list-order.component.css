@@ -11,6 +11,7 @@
 .mat-column-id {
   max-width: 5px;
   border-right: 1px solid currentColor;
+  max-width: 160px;
   padding-right: 24px;
   text-align: center;
 }

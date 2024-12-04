@@ -51,17 +51,9 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de départ </th>
               <td mat-cell *matCellDef="let element"> {{element.date_deb | date :'dd-MM-yyyy'}} </td>
             </ng-container>
-            <!-- Ending date Column -->
-            <ng-container matColumnDef="date_fin">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Date d'arrivée </th>
-              <td mat-cell *matCellDef="let element"> {{element.date_fin | date :'dd-MM-yyyy'}} </td>
-            </ng-container>
+            
 
-            <!-- transport -->
-            <ng-container matColumnDef="moyen_transport"  >
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Moyen transport </th>
-              <td mat-cell *matCellDef="let element"> {{element.moyen_transport  | titlecase}} </td>
-            </ng-container>
+           
 
             <!-- matricule -->
             <ng-container matColumnDef="matricule" >
@@ -78,14 +70,20 @@
              <!-- download button -->
              <ng-container matColumnDef="telecharger">
               <th mat-header-cell *matHeaderCellDef> Télécharger</th>
+             
               <td mat-cell *matCellDef="let element">
-                <div class="download-button-container">
-                  <a  mat-mini-fab color="secondary"
-                    (click)="generateDocWithPDFMaker(element.salarie.num_odm)"
-                  aria-label="  button  download ">
-                  <mat-icon>save_alt</mat-icon>
-                  </a>
-                </div>
+              
+                  <div class="download-button-container">
+                   
+                    <a  mat-mini-fab color="secondary"
+                      (click)="generateDocWithPDFMaker(element.num_odm)"
+                    aria-label="  button  download ">
+                    <mat-icon>save_alt</mat-icon>
+                    </a>
+               
+                  </div>
+              
+              
             </ng-container>
 
             <!-- table heads -->

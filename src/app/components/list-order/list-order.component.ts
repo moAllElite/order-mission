@@ -25,7 +25,7 @@ export class ListOrderComponent implements OnInit {
   public dataSource:any ;
   public order! :OrdreMission[];
   public displayedColumns :string[]= [  'id',  'numOdm','destination','date_deb',
-  'date_fin' ,    'moyen_transport' ,    'salarie' , 'statut'  , 'matricule','telecharger'
+   'salarie' , 'statut'  , 'matricule','telecharger'
   ];
 
 
