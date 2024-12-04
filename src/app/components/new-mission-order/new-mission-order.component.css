@@ -1,3 +1,14 @@
+.main{
+  display: flex;
+}
+.is-text-centered{
+
+}
+.title-upper{
+  text-transform: uppercase;
+  margin-left:  5rem;
+}
+
 .example-container mat-form-field + mat-form-field {
   margin: 15px 20px 10px 45px;
 }

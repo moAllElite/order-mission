@@ -8,10 +8,6 @@ export interface OrdreMission {
     dateFin: Date
     moyenTransport: string
     salarie: Employee
-   /* fonction : Fonction
-    direction:Direction
-    matricule: string
-    unite: string*/
     objet_mission: string
     itineraire: string
     statut: Statut

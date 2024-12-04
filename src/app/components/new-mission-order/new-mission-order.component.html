@@ -1,6 +1,9 @@
-<button mat-raised-button (click)="isLinear.set(!isLinear())" id="toggle-linear" class="toogle">
-  {{!isLinear() ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
+<div class="main">
+  <button mat-raised-button (click)="isLinear.set(!isLinear())" id="toggle-linear" class="toogle">
+    {{!isLinear() ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <h1 class="title-upper is-text-centered">Ajouter une demande de mission</h1>
+</div>
 <mat-stepper orientation="vertical" [linear]="isLinear()" #stepper>
   <mat-step [stepControl]=" formGroup">
     <form [formGroup]=" formGroup">
@@ -81,7 +84,7 @@
           <mat-label>Entrer les dates</mat-label>
           <mat-date-range-input   [rangePicker]="picker">
             <input matStartDate formControlName="date_deb" placeholder="Départ">
-            <input matEndDate formControlName="date_fin" placeholder="Retour">
+            <input matEndDate formControlName="date_fin" placeholder="Retour" (dateChange)="setOdmNumber()">
           </mat-date-range-input>
           <mat-hint>
             @if (formGroup.controls['date_fin'].value && formGroup.controls['date_deb'].value){

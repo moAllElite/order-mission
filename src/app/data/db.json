@@ -10,9 +10,7 @@
         "matricule": "M003",
         "unite": "UGL"
       },
-      "unite": "UGL",
-      "fonction": "SECRETAIRE",
-      "direction": "Distribution",
+      "num_odm": "04-2024",
       "objet_mission": "azaz",
       "destination": "az",
       "date_deb": "2024-12-04T00:00:00.000Z",
@@ -20,6 +18,25 @@
       "itineraire": "az",
       "moyen_transport": "za",
       "statut": "En attente"
+    },
+    {
+      "id": "5a1a",
+      "salarie": {
+        "id": 5,
+        "nom_complet": "Demba Gueye",
+        "fonction": "Agent maitrise",
+        "direction": "DSI",
+        "matricule": "M005",
+        "unite": "UDP"
+      },
+      "objet_mission": "Inspection agence Kaolack",
+      "destination": "Kaolack",
+      "date_deb": "2024-12-04T00:00:00.000Z",
+      "date_fin": "2024-12-19T00:00:00.000Z",
+      "itineraire": "Dakar-Kaolack",
+      "moyen_transport": "Vehicule personnel",
+      "statut": "En attente",
+      "num_odm": "-2013"
     }
   ],
   "personnels": [

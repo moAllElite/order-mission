@@ -26,33 +26,20 @@ export class NewMissionOrderComponent implements OnInit {
   directionControl:FormControl = new FormControl<string | Employee>('',[Validators.required]);
   functionControl:FormControl = new FormControl<string | Employee>('',[Validators.required]);
   public _formBuilder = inject(FormBuilder);
-  infoSalarieFormGroup = this._formBuilder.group({
-    salarie:this.matriculeControl,
-    unite: this.unityControl,
-    fontion:this.functionControl,
-    direction:this.directionControl,
-    objet_mission:new FormControl('',[Validators.required]),
-  });
-  infoTrajetFormGroup = this._formBuilder.group({
-    destination: new FormControl('',[Validators.required]),
-    date_deb: new FormControl<Date | null>(null,[Validators.required]),
-    date_fin: new FormControl<Date | null>(null,[Validators.required]),
-    itineraire: new FormControl('',[Validators.required]),
-    moyen_transport:new FormControl('',[Validators.required]),
-    statut:new FormControl('En attente',[Validators.required])
-  });
 
+
+  numOdmControl:FormControl<string | null> = new FormControl('');
   formGroup:FormGroup =  this._formBuilder.group(
     ({
-      salarie: this.matriculeControl, unite: this.unityControl, fonction: this.functionControl,
-      direction: this.directionControl,
+      salarie: this.matriculeControl,
       objet_mission: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required]),
       date_deb: new FormControl<Date | null>(null, [Validators.required]),
       date_fin: new FormControl<Date | null>(null, [Validators.required]),
       itineraire: new FormControl('', [Validators.required]),
       moyen_transport: new FormControl('', [Validators.required]),
-      statut: new FormControl('En attente', [Validators.required])
+      statut: new FormControl('En attente', [Validators.required]),
+      num_odm: this.numOdmControl
     }  ));
   //for autocomplete matricule
   options:WritableSignal<Employee[]>=signal([]);
@@ -117,7 +104,10 @@ export class NewMissionOrderComponent implements OnInit {
       console.log(this.formGroup.value);
 
       this.orderService.saveMissionOrder(this.order()).subscribe({
-        next: (value) => alert(JSON.stringify(value)),
+        next: (value) => {
+          alert(JSON.stringify(value));
+          this.formGroup.reset(); // reset the form after submit
+        },
         error: (err) => alert(err)
       });
     } else {
@@ -127,5 +117,8 @@ export class NewMissionOrderComponent implements OnInit {
   }
 
 
-
+  setOdmNumber() {
+    const value:Date =this.formGroup.controls['date_deb'].value;
+    this.numOdmControl.setValue(`${value.getMonth()-value.getFullYear()}`);
+  }
 }

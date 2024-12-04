@@ -9,25 +9,26 @@ import {
 } from '@angular/core';
 import SignaturePad, {PointGroup} from 'signature_pad';
 import {MatDialog} from '@angular/material/dialog';
-import {SignatureDialogComponent} from '../signature-dialog/signature-dialog.component';
 
 @Component({
   selector: 'app-signature-pad',
-  standalone: false,
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './signature-pad.component.html',
+  standalone: true,
   styleUrl: './signature-pad.component.css'
 })
 export class SignaturePadComponent  implements OnInit, AfterViewInit{
   canvas !:HTMLCanvasElement | null;
   readonly dialog:MatDialog = inject(MatDialog);
+  randomNumber: number = Math.floor(Math.random() * 1000);
   // initialize canvas
 
   signatureNeeded!: boolean; //For validating the signature
   signaturePad!:SignaturePad;//it is used to create an instance of the SignaturePad
 
   ngOnInit(): void {
+
    this.canvas = document.querySelector("canvas");
     if (this.canvas) {
       this.signaturePad = new SignaturePad(this.canvas, {
@@ -54,15 +55,8 @@ export class SignaturePadComponent  implements OnInit, AfterViewInit{
   moved(event: Event) {
     // works in device not in browser
   }
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.savePad();
-    this.dialog.open( SignatureDialogComponent, {
-      width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
 
-  }
+
 
 
 
@@ -73,6 +67,11 @@ export class SignaturePadComponent  implements OnInit, AfterViewInit{
       this.signatureNeeded = false;
 
       this.signatureImg.set( this.signaturePad.toDataURL('image/png'));
+
+      // 1- Get secure URL from our server
+      // 2- POST the image directly to the s3 bucket
+      // 3-post request to server store extrat data
+
       // Optionally: Send the signature image to the server or perform other actions
       this.downloadSignature(this.signatureImg()); // Trigger download
     }
@@ -81,7 +80,7 @@ export class SignaturePadComponent  implements OnInit, AfterViewInit{
   downloadSignature(data: string) {
     const a = document.createElement('a');
     a.href = data;
-    a.download = 'signature.png'; // File name for download
+    a.download =  `signature-${this.randomNumber}.png`; // File name for download
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
