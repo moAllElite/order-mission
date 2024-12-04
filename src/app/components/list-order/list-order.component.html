@@ -69,7 +69,7 @@
 
              <!-- download button -->
              <ng-container matColumnDef="telecharger">
-              <th mat-header-cell *matHeaderCellDef> Télécharger</th>
+              <th mat-header-cell *matHeaderCellDef> Actions</th>
              
               <td mat-cell *matCellDef="let element">
               
@@ -80,7 +80,9 @@
                     aria-label="  button  download ">
                     <mat-icon>save_alt</mat-icon>
                     </a>
-               
+                    <a mat-mini-fab title="Voir détails">
+                      <mat-icon >remove_red_eye</mat-icon>
+                    </a>
                   </div>
               
               

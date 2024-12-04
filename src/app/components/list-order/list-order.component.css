@@ -6,6 +6,7 @@
 }
 .demo-table {
   max-width: 100%;
+  min-width: 20%;
 }
 
 .mat-column-id {
@@ -16,8 +17,8 @@
   text-align: center;
 }
 .mat-column-date_deb {
-  max-width: 160px;
-  text-align: center;
+  max-width: 150px;
+  margin-left: 2px;
 }
 .mat-column-date_fin {
   max-width: 160px;
@@ -37,8 +38,9 @@
 }
 
 
-.mat-column-demo-salarie{
-  font-style: italic;
+.mat-column-destination{
+   text-align: center;
+   width: 100px;
 }
 
 .mat-column-num_odm {
@@ -46,11 +48,15 @@
   text-align: center;
   font-weight: bold;
 }
-
+.primary{
+  background-color:#8f0045;
+  color:white ; 
+}
 .download-button-container {
   display: flex;
   justify-content: center;
   width: 140px;
+  gap: 10px;
 }
 
 /**

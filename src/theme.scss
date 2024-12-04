@@ -8,7 +8,17 @@
       ),
     )
 );
-
+/*
+$theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$magenta-palette,
+      tertiary: mat.$azure-palette,
+    ),
+  )
+);*/
+ 
 
 @mixin theme($theme) {
   app-navbar {

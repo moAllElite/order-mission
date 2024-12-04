@@ -5,6 +5,7 @@ import {OrdreMission} from '../../models/ordre-mission';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-order',
@@ -15,7 +16,9 @@ import {MatSort} from '@angular/material/sort';
 })
 export class ListOrderComponent implements OnInit {
 
-  constructor(public orderService: OrderMissionService, public pdfService: PdfService,){}
+  constructor(public orderService: OrderMissionService,
+    private route:Router
+    , public pdfService: PdfService,){}
 
   // params for tables
   orders:WritableSignal<OrdreMission[] >= signal([]) ;
@@ -66,10 +69,9 @@ export class ListOrderComponent implements OnInit {
         )
         },
       }
-
-    )
-
-
+       
+    );
+       this.route.navigateByUrl('orders');
     }
 
 

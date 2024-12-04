@@ -12,12 +12,12 @@
         "unite": "UGL"
       },
       "num_odm": "11-2024",
-      "objet_mission": "fg",
-      "destination": "ui",
+      "objet_mission": "Inspection agence Diass",
+      "destination": "Diass",
       "date_deb": "2024-12-05T00:00:00.000Z",
       "date_fin": "2024-12-19T00:00:00.000Z",
-      "itineraire": "g",
-      "moyen_transport": "gh",
+      "itineraire": "Dakar-Diass",
+      "moyen_transport": "Véhicule personnel",
       "statut": "En attente"
     }
   ],
