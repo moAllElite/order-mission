@@ -1,0 +1,28 @@
+<!-- toolbar & navbar-->
+<mat-toolbar  color="secondary">
+  <button mat-icon-button class="mat-elevation-z3"
+          color="warn"
+          (click)="collapsed.set(!collapsed())"
+          aria-label="Example icon-button with menu icon">
+    <mat-icon  class="icon">menu</mat-icon>
+  </button>
+  <span routerLink="/orders">Gestion ordres mission</span>
+
+</mat-toolbar>
+<!-- end toolbar -->
+
+<!-- SIDENAV-->
+
+
+<!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+<mat-sidenav-container   opened  >
+  <mat-sidenav  mode="side"  opened [style.width]="sideNavWidth()"      >
+    <app-custom-sidebar [collapsed]="collapsed()" [style.max-width]="sideNavWidth()" ></app-custom-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content  class="content" [style.margin-left]="sideNavWidth()"  >
+    <!-- content-->
+      <router-outlet></router-outlet>
+    <!-- content -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
