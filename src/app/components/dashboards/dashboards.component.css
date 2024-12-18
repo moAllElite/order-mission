@@ -1,0 +1,38 @@
+.title{
+  font-weight: 200;
+}
+.dashboard-widgets{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px,5fr));
+}
+.header{
+  display: flex;
+  align-items: center;
+}
+
+.is-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.has-text-centered{
+  text-align: center;
+}
+
+mat-card{
+  background-color: whitesmoke;
+}
+.chiffres{
+  display: flex;
+  gap: 12px;
+  margin: -6px 0 1.2em 0;
+}
+
+.is-big{
+  font-size: 2.9em;
+}
+.box{
+  max-height: 100px;
+  max-width: 120px;
+}

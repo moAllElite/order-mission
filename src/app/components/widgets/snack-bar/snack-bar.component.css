@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  height: 50px;
+}
+
+.example-pizza-party {
+  color: hotpink; 
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}

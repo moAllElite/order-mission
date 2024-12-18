@@ -1,0 +1,64 @@
+mat-card{
+  max-width: 1280px;
+}
+.text-centered{
+  text-align: center;
+}
+.main{
+  margin:  0;
+  align-items: center;
+}
+
+.center{
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+
+mat-stroked-button{
+  background-color: #8f0045;
+  color: #fff;
+}
+.container{
+ gap:9rem;
+}
+.missionInfo{
+  margin: 0 0 0 5px;
+}
+.userInfo{
+  margin:  0 5px 0 0;
+}
+.objet-ms{
+  max-width: 500px;
+}
+.warn{
+  background-color: #8f0045;
+  color: #fff;
+}
+mat-card-actions, .btns{
+  gap: 5rem;
+}
+mat-tab{
+  margin-top: 12px 0 0 0;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  display: flex;
+}
+mat-card{
+
+}
+
+.info-mission{
+  margin: 2em 0 0 12em;
+  max-width: 600px;
+}
+
+.info-agent{
+  margin: 4em 0 0 15em;
+  max-width: 450px;
+}
+.dates{
+  gap: 3em;
+  word-spacing: 8px;
+}

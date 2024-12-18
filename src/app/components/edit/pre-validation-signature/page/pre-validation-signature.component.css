@@ -1,0 +1,53 @@
+.my-grid {
+  display: flex;
+  flex-wrap:wrap;
+  margin: 3.8em 0 0 0;
+  gap: 12px;
+}
+mat-flat-button,mat-stroked-button{
+  gap: 1.5rem;
+  margin-right: 15px;
+}
+.expansion{
+  max-width: 900px;
+}
+.btns{
+  margin:10px  15px 0 0;
+}
+.flat{
+  margin-right: 3rem;
+  margin-bottom: 12px;
+}
+
+/**
+  * Signature Pad Style
+*/
+
+
+
+canvas {
+  display: block;
+  border: 1px solid rgb(187, 178, 178);
+  max-width: 600px;
+  width: 500px;
+  max-height: 400px;
+}
+
+@media (max-width: 600px) {
+  .my-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+
+
+
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .my-grid {
+    grid-template-columns: 1fr 1fr !important;
+    > .col-1 {max-width: 30%;}
+  }
+}
+
+
