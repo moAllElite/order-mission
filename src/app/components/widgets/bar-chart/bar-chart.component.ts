@@ -1,11 +1,9 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { BarChartService } from '../../../services/charts/bar-chart.service';
 import { OrderMissionService } from '../../../services/order-mission.service';
-import { OrdreMission, Statut } from '../../../models/ordre-mission';
-import { map } from 'rxjs';
+import { OrdreMission } from '../../../models/ordre-mission';
 
 
 @Component({

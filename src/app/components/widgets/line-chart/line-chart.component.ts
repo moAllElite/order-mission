@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { BaseChartDirective } from 'ng2-charts';
 import { RadarChartService } from '../../../services/charts/line-chart.service';
+import { CHART_COLORS, transparentize } from '../../../models/chart-color';
 /**
  * LIne chart
  */
 @Component({
   selector: 'app-radar-chart',
   standalone: true,
-  imports:[BaseChartDirective,MatCardModule],
+  imports:[BaseChartDirective,MatCardModule,
+
+  ],
   templateUrl: './line-chart.component.html',
   styleUrl: './line-chart.component.css'
 })
@@ -29,7 +32,7 @@ export class LineChartComponent  implements OnInit {
   }
 
 
-  //get all data 
+  //get all data
 
   getData(){
     this.getStatsPaymentsDSI();
@@ -81,9 +84,21 @@ export class LineChartComponent  implements OnInit {
       label: 'Paiements de frais de mission',
       data: this.stats,
       fill: false,
-      borderColor: 'rgb(75, 192, 192)',
+      borderColor: CHART_COLORS.green,
+      backgroundColor: transparentize(CHART_COLORS.green, 0.5),
+      pointStyle: 'circle',
+      pointRadius: 10,
+      pointHoverRadius: 15,
       tension: 0.1
-    }]
+    }],options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: (ctx:any) => 'Point Style: ' + ctx.chart.data.datasets[0].pointStyle,
+          }
+        }
+      }
     }
   }
 

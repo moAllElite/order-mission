@@ -48,6 +48,26 @@ import { SnackBarComponent } from './components/widgets/snack-bar/snack-bar.comp
 import { MatTabsModule } from '@angular/material/tabs';
 registerLocaleData(localeFr, 'fr');
 
+import Keycloak from 'keycloak-js';
+import { KeycloakService } from 'keycloak-angular';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return async () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8080',
+        realm: 'jhispter',
+        clientId: 'web_app',
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      },
+    });
+}
+
+
 
 @NgModule({
   declarations: [

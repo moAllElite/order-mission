@@ -15,13 +15,16 @@ import { Paiement } from '../../models/paiement';
 import { Observable,map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
+import { Chart } from 'chart.js';
+import { ChartData } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-dashboards',
   standalone:true,
   imports: [
     DoughnutChartComponent, MatCardModule, MatIconModule,
     BarChartComponent, LoadingSpinnerComponent,
-    PolarAreaChartComponent,
+    PolarAreaChartComponent, 
    LineChartComponent,CommonModule,CurrencyPipe
 ],
   templateUrl: './dashboards.component.html',
@@ -83,6 +86,22 @@ export class DashboardsComponent implements OnInit{
     )
   }
 
+
+
+
+  //
+  data=[34,2,15,78]
+
+    options = {
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'month'
+                }
+            }
+        }
+    }
 
 
 }
