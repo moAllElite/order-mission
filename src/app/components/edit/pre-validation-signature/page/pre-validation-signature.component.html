@@ -1,0 +1,28 @@
+  @if(showSnackBar()){
+    <app-snack-bar ></app-snack-bar>
+  }
+  <form [formGroup]="form"   class="my-grid" >
+    <div >
+        <!-- signature pad -->
+        <div  class="mains" >
+            <!-- signature pad -->
+            <canvas #canvas  (mouseleave)="getPad($event)"></canvas>
+            <p class="error-message" *ngIf="signatureNeeded">Signature est requise</p>
+          </div>
+        <!--end signature pad-->
+      <div class="btns" >
+        <button mat-flat-button class="flat" type="submit" (click)="onSubmit()">Enregistrer</button>
+        <button mat-raised-button color="primary" class="flat is-red" type="button" (click)="onReject()" >Rejeter</button>
+        <button class="flat btn-clear"  mat-stroked-button (click)="clearPad()">Effacer</button>
+      </div>
+
+    </div>
+    <div  class="expansion" >
+      @if (ordre(); as  ordre){
+          <app-expansion [ordreMission]="ordre" ></app-expansion>
+      }
+    </div>
+
+  </form>
+
+

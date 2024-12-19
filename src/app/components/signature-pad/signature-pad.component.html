@@ -1,0 +1,14 @@
+<div  class="mains" >
+  <div class="pad">
+    <!-- signature pad -->
+    <canvas #canvas (mouseout)="savePad($event)"></canvas>
+    <button class="flat" (click)="clearPad()">Effacer</button>
+    </div>
+
+    <p class="error-message" *ngIf="signatureNeeded">Signature est requise</p>
+
+
+  </div>
+
+
+

@@ -1,0 +1,99 @@
+
+
+@if(order$() | async; as orders){
+  @for (order of orders; track order$) {
+      <h1 class="title">Detail de l'ordre de mission</h1>
+      <mat-divider></mat-divider>
+      <div class="btns center mt-3">
+        @if(order.statut === 'En attente'){
+          <a  mat-flat-button color="warn"  routerLink="/edit/pre-valid/{{numOdm()}}">
+            <mat-icon>check-cercle</mat-icon>
+            Pré-validé
+          </a>
+        }
+        @if(order.statut === 'Prévalidé'){
+          <a  mat-raised-button color="warn" >
+            <mat-icon>check_circle</mat-icon>
+            Validé
+          </a>
+        }
+      </div>
+      <mat-tab-group>
+        <mat-tab label="Informations  mission">
+          <mat-card class="warn info-mission ">
+            <mat-card-content>
+              <div class="missionInfo">
+                <h4>N° ordre de mission: {{ order.num_odm }}</h4>
+                <p class="objet-ms">Objet de la mission : {{ order.objet_mission }}</p>
+                <p> Destination: {{ order.destination }}</p>
+                <p class="dates">Date départ : {{order.date_deb | date: 'dd-MM-yyyy' }}  retour prévu le : {{order.date_fin | date: 'dd-MM-yyyy' }} </p>
+                <p>Statut : {{ order.statut }}</p>
+                <p>Itinéraire: {{ order.itineraire }}</p>
+                <p>Moyen  de transport : {{ order.moyen_transport }}</p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Informations sur l'agent">
+          <mat-card class="info-agent">
+            <mat-card-header>
+              <h4>Matricule : {{order.salarie.matricule  }}</h4>
+            </mat-card-header>
+            <mat-card-content>
+              <!-- AGENT  info -->
+
+              <p>Nom complet: {{ order.salarie.nom_complet }} </p>
+              <p>Fonction: {{ order.salarie.fonction | titlecase }}</p>
+              <p>Unité :  {{ order.salarie.unite }}</p>
+              <p>Direction : {{ order.salarie.direction }}</p>
+
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+      </mat-tab-group>
+      <!--
+      <mat-grid-list cols="2" rowHeight="2:1">
+
+
+            <div class="container center">
+                <mat-card class="warn">
+                  <mat-card-header>
+                    <h3  >Information mission</h3>
+                  </mat-card-header>
+
+                  <mat-card-content>
+                    <div class="missionInfo">
+
+                      <p>N° ordre de mission: {{ order.num_odm }}</p>
+                      <p class="objet-ms">Objet de la mission : {{ order.objet_mission }}</p>
+                      <p> Destination: {{ order.destination }}</p>
+                      <p>Date début : {{order.date_deb | date: 'dd-MM-yyyy' }} </p>
+                      <p>Retour prévu : {{order.date_fin | date: 'dd-MM-yyyy' }}</p>
+                      <p>Statut : {{ order.statut }}</p>
+                      <p>Itinéraire: {{ order.itineraire }}</p>
+                      <p>Moyen  de transport : {{ order.moyen_transport }}</p>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              <div class="userInfo">
+                <mat-card>
+                  <mat-card-header>
+                    <h3  >Information Agent</h3>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>Nom complet: {{ order.salarie.nom_complet }} </p>
+                    <p>Matricule : {{order.salarie.matricule  }}</p>
+                    <p>Fonction: {{ order.salarie.fonction | titlecase }}</p>
+                    <p>Unité :  {{ order.salarie.unite }}</p>
+                    <p>Direction : {{ order.salarie.direction }}</p>
+
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+
+      </mat-grid-list>
+
+    -->
+    }
+  }

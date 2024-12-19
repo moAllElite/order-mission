@@ -1,0 +1,156 @@
+@if(showSnackBar()){
+
+      <app-snack-bar ></app-snack-bar>
+
+}
+<div class="main">
+  <button mat-raised-button (click)="isLinear.set(!isLinear())" id="toggle-linear" class="toogle">
+    {{!isLinear() ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <h1 class="title-upper is-text-centered">Ajouter une demande de mission</h1>
+</div>
+<mat-stepper orientation="vertical" [linear]="isLinear()" #stepper>
+      <mat-step [stepControl]=" formGroup">
+        <form [formGroup]=" formGroup">
+          <div class="step-one">
+            <div class="example-container">
+              <mat-form-field  >
+                <mat-label>Matricule</mat-label>
+                <input matInput
+                       type="text" [formControl]="matriculeControl"
+                       required
+                       [matAutocomplete]="auto"
+                       placeholder="Matricule agent">
+                       <mat-icon matSuffix> verified_user</mat-icon>
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  @for (option of filteredOptions | async; track option) {
+                    <mat-option [value]="option">{{option.matricule}}</mat-option>
+                  }
+                </mat-autocomplete>
+              </mat-form-field>
+
+                <!--SALERIE-->
+                <mat-form-field >
+                  <mat-label>Entre le nom de l'agent </mat-label>
+                  <input matInput placeholder="nom de l'agent"
+                         [formControl]="nameControl"
+                         readonly />
+                         <mat-icon matSuffix>person</mat-icon>
+                </mat-form-field>
+
+              <!-- unite -->
+              <mat-form-field  >
+                <mat-label>Entre l'unité</mat-label>
+                <input matInput placeholder="Unite placeholder"
+                       [formControl]="unityControl"
+                       required readonly />
+                <mat-icon matSuffix> category</mat-icon>
+              </mat-form-field>
+
+              </div>
+              <div class="example-container">
+              <!-- unite -->
+              <mat-form-field  >
+                <mat-label>Entre le service</mat-label>
+                <input matInput placeholder="Service "
+                       [formControl]="serviceControl"
+                       required readonly />
+                <mat-icon matSuffix> category</mat-icon>
+              </mat-form-field>
+
+              <!--fonction-->
+              <mat-form-field >
+                <mat-label>Entre la fonction </mat-label>
+                <input matInput placeholder="Fonction placeholder"
+                       [formControl]="functionControl"
+                       readonly
+                />
+                <mat-icon matSuffix>beenhere</mat-icon>
+              </mat-form-field>
+                  <!--direction-->
+              <mat-form-field >
+                <mat-label>Entre la direction </mat-label>
+                <input matInput placeholder="Direction placeholder"
+                      [formControl]="directionControl"
+                      readonly />
+                <mat-icon matSuffix> compass_calibration</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+  <mat-step [stepControl]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="example-container mt-2" >
+        <!-- destination -->
+        <mat-form-field  >
+          <mat-label>Destination</mat-label>
+          <input matInput placeholder="Placeholder"
+                 formControlName="destination"
+          >
+          <mat-icon matSuffix>place</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+        <!-- itineraire -->
+        <mat-form-field  >
+          <mat-label>Entre l'itinéraire</mat-label>
+          <input matInput placeholder="Itinéraire" type="text"  formControlName="itineraire">
+          <mat-icon matSuffix>map</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field class="objet-textarea">
+          <mat-label>Objet de la mission</mat-label>
+          <textarea matInput placeholder="L'objet de la demande" formControlName="objet_mission"></textarea>
+        </mat-form-field>
+        </div>
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="example-container" >
+
+      </div>
+      <!-- Date départ &  fin de mission  moyen de transport -->
+      <div class="example-container mt-2">
+        <mat-form-field>
+          <mat-label>Entrer les dates</mat-label>
+          <mat-date-range-input   [rangePicker]="picker">
+            <input matStartDate formControlName="date_deb" placeholder="Départ"
+             (dateInput)="setOdmNumber()">
+            <input matEndDate formControlName="date_fin" placeholder="Retour" >
+          </mat-date-range-input>
+          <mat-hint>
+            @if (formGroup.controls['date_fin'].value && formGroup.controls['date_deb'].value){
+              Date de départ :  {{formGroup.controls['date_deb'].value | date :'dd-MM-yyyy'}}.<br/>
+              Retour prévu: {{formGroup.controls['date_fin'].value | date :'dd-MM-yyyy'}}.
+            }@else{ MM/DD/YYYY – MM/DD/YYYY            }
+          </mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+        </mat-form-field>
+        <!-- moyen de transport -->
+        <mat-form-field  >
+          <mat-label>Moyen de transport</mat-label>
+          <input matInput placeholder="Moyen de transport" type="text"  formControlName="moyen_transport">
+          <mat-icon matSuffix>directions_car</mat-icon>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="formGroup">
+    <ng-template matStepLabel>Terminé</ng-template>
+
+
+    <div class="g-3">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()" >Reset</button>
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Valider</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+

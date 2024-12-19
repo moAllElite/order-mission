@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+   }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.primary{
+  background-color:#8f0045;
+  color:white ;
+}
+
+.mt-3{
+  margin-top: 10px;
+}
+
+.is-light-title{
+  font-weight: 200;
+}
+.has-text-centered{
+  text-align: center;
+}

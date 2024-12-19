@@ -1,0 +1,84 @@
+.main{
+  display: flex;
+  margin-bottom: -35px;
+}
+.example-container mat-form-field + mat-form-field {
+  margin-left: 0.9em;
+}
+.is-text-centered{
+
+}
+.mt-2{
+  margin: 16px 0 0 0;
+}
+.snack{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+.objet-textarea{
+  width: 63.6%;
+  margin: 0.9em  0 -30px 0;
+}
+.title-upper{
+  text-transform: uppercase;
+  margin-left:  5rem;
+}
+
+
+.status{
+  display: none;
+}
+
+.toogle{
+  margin: .9rem 0 0 0;
+}
+.g-3{
+  gap:  7rem;
+}
+
+/*.container{
+  align-items: center;
+}
+
+.card{
+  padding: 0 0 0 1.2em ;
+  margin: 3em  0 0 0;
+}
+.is-center{
+  display: flex;
+  justify-content: center;
+}
+is-text-centered{
+  text-align: center;
+  padding: 1rem 0 0 0.6rem;
+}
+.dates-form-field {
+  margin: 0  50px 0 50px;
+}
+
+
+
+
+
+
+.btn-actions{
+  display: flex;
+  justify-content: center;
+}
+.my-colors {
+  --mdc-protected-button-label-text-color: red;
+  --mdc-protected-button-container-color: blue;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+*/

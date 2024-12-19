@@ -1,0 +1,127 @@
+<div class="main">
+  <mat-card  appearance="outlined" >
+
+      <mat-card-header>
+        <mat-card-title class="is-title"  > Liste des ordres de missions  </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+          <div class="search-area">
+                <!--- Search Keyword -->
+              <mat-form-field class="example-full-width" >
+                <mat-label>Filtrer</mat-label>
+                    <input placeholder="Recherche"   matInput (change)="filterOrders($event)" >
+              </mat-form-field>
+                <!-- Date Filters -->
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Date de départ</mat-label>
+                  <input matInput [matDatepicker]="startPicker" (dateChange)="onStartDateChange($event)" />
+                  <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #startPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Date de retour</mat-label>
+                  <input matInput [matDatepicker]="endPicker" (dateChange)="onEndDateChange($event)" />
+                  <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #endPicker></mat-datepicker>
+                </mat-form-field>
+              
+
+          </div>
+
+          <!-- mission orders tables-->
+          <table matSort  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by id"
+              >#</th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Num. Order Column -->
+            <ng-container matColumnDef="numOdm" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> N° ODM  </th>
+              <td mat-cell *matCellDef="let element"> {{element.num_odm}} </td>
+            </ng-container>
+              <!-- matricule -->
+              <ng-container matColumnDef="matricule" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Matricule</th>
+                <td mat-cell *matCellDef="let element"> {{element.salarie.matricule}} </td>
+              </ng-container>
+
+            <!-- Employee's name -->
+            <ng-container matColumnDef="salarie">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom de l'agent </th>
+              <td mat-cell *matCellDef="let element"> {{element.salarie.nom_complet | titlecase}} </td>
+            </ng-container>
+
+
+            <!-- Debut date Column -->
+            <ng-container matColumnDef="date_deb">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de départ </th>
+              <td mat-cell *matCellDef="let element"> {{element.date_deb | date :'dd-MM-yyyy'}} </td>
+            </ng-container>
+              <!-- end date Column -->
+              <ng-container matColumnDef="date_fin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de retour </th>
+                <td mat-cell *matCellDef="let element"> {{element.date_fin | date :'dd-MM-yyyy'}} </td>
+              </ng-container>
+
+
+
+
+            <!-- statut -->
+            <ng-container matColumnDef="statut"  >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+              <td mat-cell *matCellDef="let element"> {{element.statut}} </td>
+            </ng-container>
+
+             <!-- download button -->
+             <ng-container matColumnDef="telecharger" >
+              <th mat-header-cell *matHeaderCellDef> Télécharger</th>
+              <td mat-cell *matCellDef="let element">
+                  <div class="download-button-container">
+                    <a  mat-mini-fab color="secondary"
+                      (click)="generateDocWithPDFMaker(element.num_odm)"
+                    aria-label="  button  download ">
+                    <mat-icon>save_alt</mat-icon>
+                    </a>
+                  </div>
+            </ng-container>
+             <!-- detail button -->
+             <ng-container matColumnDef="detail">
+              <th mat-header-cell *matHeaderCellDef> Voir détails</th>
+
+              <td mat-cell *matCellDef="let element">
+
+                  <div class="download-button-container">
+                    <a mat-mini-fab title="Voir détails" class="primary"
+                      routerLink="/order/{{element.num_odm}}">
+                      <mat-icon >remove_red_eye</mat-icon>
+                    </a>
+                  </div>
+            </ng-container>
+
+            <!-- table heads -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+
+        <!-- PAGINATOR-->
+
+        <mat-paginator [pageSizeOptions]="[5, 10,15, 20,50,100]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
+

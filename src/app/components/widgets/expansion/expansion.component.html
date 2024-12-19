@@ -1,0 +1,124 @@
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step() === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Informations Personnelles  </mat-panel-title>
+      <mat-panel-description>
+        Matricule: <span>{{ordreMission().salarie.matricule}}</span>
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!-- nom complet-->
+    <mat-form-field>
+      <mat-label>Nom Complet</mat-label>
+      <input matInput [value]="ordreMission().salarie.nom_complet" readonly />
+    </mat-form-field>
+
+    <!-- Poste -->
+    <mat-form-field>
+      <mat-label>Poste</mat-label>
+      <input matInput [value]="ordreMission().salarie.fonction |titlecase"  readonly/>
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button (click)="nextStep()">Suivant</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step() === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Informations professionnelles  </mat-panel-title>
+        <mat-panel-description>
+          Matricule de l'agent : <p>{{ordreMission().salarie.matricule}}</p>
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- direction -->
+      <mat-form-field>
+        <mat-label>Poste</mat-label>
+        <input matInput [value]="ordreMission().salarie.direction |titlecase"  readonly/>
+      </mat-form-field>
+      <!-- Service -->
+      <mat-form-field>
+        <mat-label>Poste</mat-label>
+        <input matInput [value]="ordreMission().salarie.service |titlecase"  readonly/>
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-button (click)="prevStep()">Précédent</button>
+        <button mat-button (click)="nextStep()">Suivant</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step() ===2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Informations sur la mission </mat-panel-title>
+        <mat-panel-description>
+          Numéro ordre de mission :   {{ordreMission().num_odm}}
+          <mat-icon>airplanemode_active</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- objet ms -->
+      <mat-form-field>
+        <mat-label>Objet de la mission</mat-label>
+        <textarea matInput [value]="ordreMission().objet_mission"  readonly class="field" ></textarea>
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button (click)="prevStep()">Précédent</button>
+        <button mat-button (click)="nextStep()">Suivant</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Destination & Transport </mat-panel-title>
+      <mat-panel-description>
+        Numéro ordre de mission :   {{ordreMission().num_odm}}
+        <mat-icon>map</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!-- destination -->
+    <mat-form-field>
+      <mat-label>Destination</mat-label>
+      <input matInput [value]="ordreMission().destination |titlecase"  readonly/>
+    </mat-form-field>
+    <!-- moyen de transport -->
+    <mat-form-field>
+      <mat-label>Moyen de transport</mat-label>
+      <input matInput [value]="ordreMission().moyen_transport |titlecase"  readonly/>
+    </mat-form-field>
+
+
+    <mat-action-row>
+      <button mat-button (click)="prevStep()">Précédent</button>
+      <button mat-button (click)="nextStep()">Suivant</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step() === 4" (opened)="setStep(4)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Date de mission </mat-panel-title>
+      <mat-panel-description>
+        Information sur les dates de  mission
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <mat-label>Date d'arrivée</mat-label>
+      <input matInput [matDatepicker]="picker" [value]="ordreMission().date_deb" [readOnly]="true"
+            readonly />
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Retour prévu le</mat-label>
+      <input matInput [value]="ordreMission().date_fin | date:'dd/MM/yyyy'"
+               [readOnly]="true" readonly />
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button (click)="prevStep()">Précédent</button>
+      <button mat-button (click)="nextStep()">Fin</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
