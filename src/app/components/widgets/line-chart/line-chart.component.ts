@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { BaseChartDirective } from 'ng2-charts';
-import { RadarChartService } from '../../../services/charts/line-chart.service';
+import { LineChartService } from '../../../services/charts/line-chart.service';
 import { CHART_COLORS, transparentize } from '../../../models/chart-color';
 /**
  * LIne chart
@@ -9,9 +9,7 @@ import { CHART_COLORS, transparentize } from '../../../models/chart-color';
 @Component({
   selector: 'app-radar-chart',
   standalone: true,
-  imports:[BaseChartDirective,MatCardModule,
-
-  ],
+  imports:[BaseChartDirective,MatCardModule,  ],
   templateUrl: './line-chart.component.html',
   styleUrl: './line-chart.component.css'
 })
@@ -23,7 +21,7 @@ export class LineChartComponent  implements OnInit {
     mode:string[]=[];
 
      constructor(
-         public radarChartService:RadarChartService
+         readonly lineChartService:LineChartService
       ) {}
 
 
@@ -42,7 +40,7 @@ export class LineChartComponent  implements OnInit {
   }
 
   getStatsPaymentsDSI(){
-    this.radarChartService
+    this.lineChartService
     .loadPayementDSI()
     .subscribe((data) => {
       this.updateChart(data,"DSI");
@@ -50,7 +48,7 @@ export class LineChartComponent  implements OnInit {
   }
 
   getStatsPaymentsDRH(){
-    this.radarChartService
+    this.lineChartService
     .loadPayementDrh()
     .subscribe((data) => {
       this.updateChart(data,"DRH");
@@ -58,7 +56,7 @@ export class LineChartComponent  implements OnInit {
   }
 
   getStatsPaymentsTransport(){
-    this.radarChartService
+    this.lineChartService
     .loadPayementDrh()
     .subscribe((data) => {
       this.updateChart(data,"Transport");
@@ -68,7 +66,7 @@ export class LineChartComponent  implements OnInit {
 
   //get sold payment distribution
   getStatsPaymentsDistribution(){
-    this.radarChartService
+    this.lineChartService
     .loadPayementDistribution()
     .subscribe((data) => {
       this.updateChart(data,"Distribution");

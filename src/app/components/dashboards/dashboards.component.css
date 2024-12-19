@@ -23,11 +23,26 @@
 mat-card{
   background-color: whitesmoke;
 }
+.mat-icon{
+  margin-top: 10px;
+}
 .bg-success{
   background-color:  rgb(169 208 179);
  }
  .bg-accent{
   background-color: rgb(248 226 135);
+ }
+ .bg-warn{
+  color: rgb(255 255 255);
+  background-color:#8f0045;
+ }
+ .bg-tertiary{
+  background-color: rgb(102 94 64);
+  color: rgb(255 249 238);
+
+ }
+ .size{
+  margin-right: 10px;
  }
 
 .chiffres{

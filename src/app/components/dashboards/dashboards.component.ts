@@ -18,13 +18,14 @@ import { CurrencyPipe } from '@angular/common';
 import { Chart } from 'chart.js';
 import { ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { AnalyticsService } from '../../services/charts/analytics.service';
 @Component({
   selector: 'app-dashboards',
   standalone:true,
   imports: [
     DoughnutChartComponent, MatCardModule, MatIconModule,
     BarChartComponent, LoadingSpinnerComponent,
-    PolarAreaChartComponent, 
+    PolarAreaChartComponent,
    LineChartComponent,CommonModule,CurrencyPipe
 ],
   templateUrl: './dashboards.component.html',
@@ -33,19 +34,23 @@ import { BaseChartDirective } from 'ng2-charts';
 export class DashboardsComponent implements OnInit{
 
   numberOfMissionOncurrent :WritableSignal<number> =signal(0);
+  currentMonthSpending : WritableSignal<number> =signal(0);
   constructor(readonly chartService:BarChartService
-    ,readonly paymentService:PaiementService
+    ,readonly analyticService:AnalyticsService
+
   ){}
   ngOnInit(): void {
     setTimeout(()=>{
       this.totalMissionCurrentMonth();
       this.getTotalSpending();
+      this.getTotalSpendingCurrentMonth();
+      this. getTotalSpendingQuarterMonth();
     },
     100);
   }
   //get the total amount spending annual
   getTotalSpending(){
-    this.getTotalPayment().subscribe({
+    this. analyticService.getTotalPayment().subscribe({
       next: (sum: number) => {
         console.log(sum);
         this.totalSpending.set(sum);
@@ -65,43 +70,27 @@ export class DashboardsComponent implements OnInit{
   }
   //
   totalSpending:WritableSignal<number> =signal(0);
+  totalSpendingQuarterMonth:WritableSignal<number> =signal(0);
 
 
-  //get annual amount spending on mission
-  getTotalPayment():Observable<number>{
-    return this.paymentService
-    .getPayments()
-    .pipe(
-      map(
-         (response: Paiement[]) => {
-                      const bills= response.filter(
-                        (item: Paiement) => item.montant
-                      );
-                      // calculate sum
-                      const sum =bills.reduce((sum,bills) => sum +bills.montant,0);
-
-                      return sum;
-                    }
-                  )
-    )
+  getTotalSpendingCurrentMonth(){
+    this. analyticService.getTotalPaymentForCurrentMonth()
+    .subscribe(
+      {
+        next: (value)=>this.currentMonthSpending.set(value)
+      }
+    );
   }
 
+  getTotalSpendingQuarterMonth(){
+    this.analyticService.getTotalPaymentForQuarterMonth()
+    .subscribe(
+      {
+        next: (value)=>this. totalSpendingQuarterMonth.set(value)
+      }
+    );
+  }
 
-
-
-  //
-  data=[34,2,15,78]
-
-    options = {
-        scales: {
-            x: {
-                type: 'time',
-                time: {
-                    unit: 'month'
-                }
-            }
-        }
-    }
 
 
 }

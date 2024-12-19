@@ -28,3 +28,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
  .bg-accent{
   background-color: rgb(248 226 135);
  }
+
+ .bg-warn{
+  background-color:#8f0045;
+ }

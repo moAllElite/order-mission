@@ -7,7 +7,7 @@ import { Direction } from '../../models/ordre-mission';
 @Injectable({
   providedIn: 'root'
 })
-export class RadarChartService {
+export class LineChartService {
 
     constructor(public payementService:PaiementService) { }
 

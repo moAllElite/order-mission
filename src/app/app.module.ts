@@ -116,7 +116,7 @@ import { AuthGuard } from './guards/auth.guard';
     {provide: LOCALE_ID, useValue: "fr-FR"},// for french support
     provideHttpClient(), provideCharts(withDefaultRegisterables()), // for http requests,
     // inject keycloack on app initialize
-    provideAppInitializer(() =>
+   /* provideAppInitializer(() =>
       {
         const initFn = ((key: KeycloakService) => {
           return () => key.init({
@@ -132,9 +132,9 @@ import { AuthGuard } from './guards/auth.guard';
         })(inject(KeycloakService));
         return initFn();
       }
-  ),
+  ),*/
 
-    KeycloakService,
+   // KeycloakService,
   ],
   exports: [
 

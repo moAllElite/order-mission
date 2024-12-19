@@ -42,10 +42,10 @@ export class DoughnutChartComponent implements OnInit{
           label: 'Total',
           data: this.stats,
           backgroundColor: [
+            'rgb(5, 162, 235)',
             'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(44 78 56)'
+            'rgb(248 226 135)',
+            'rgb(67 102 78)'
           ],
           hoverOffset: 4
         }]
