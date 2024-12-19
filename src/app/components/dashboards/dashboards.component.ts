@@ -22,7 +22,7 @@ import { CurrencyPipe } from '@angular/common';
     DoughnutChartComponent, MatCardModule, MatIconModule,
     BarChartComponent, LoadingSpinnerComponent,
     PolarAreaChartComponent,
-    RadarChartComponent,CommonModule,CurrencyPipe 
+    RadarChartComponent,CommonModule,CurrencyPipe
 ],
   templateUrl: './dashboards.component.html',
   styleUrl: './dashboards.component.css'
@@ -40,7 +40,7 @@ export class DashboardsComponent implements OnInit{
     },
     100);
   }
-
+  //get the total amount spending 
   getTotalSpending(){
     this.getTotalPayment().subscribe({
       next: (sum: number) => {
@@ -49,6 +49,7 @@ export class DashboardsComponent implements OnInit{
       }
     })
   }
+  // get the total mission on current month
   totalMissionCurrentMonth(){
     this.chartService.getTotalMissionCurrentMonth()
     .subscribe(
