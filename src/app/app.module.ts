@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { inject, LOCALE_ID, NgModule, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,23 +50,7 @@ registerLocaleData(localeFr, 'fr');
 
 import Keycloak from 'keycloak-js';
 import { KeycloakService } from 'keycloak-angular';
-
-function initializeKeycloak(keycloak: KeycloakService) {
-  return async () =>
-    keycloak.init({
-      config: {
-        url: 'http://localhost:8080',
-        realm: 'jhispter',
-        clientId: 'web_app',
-      },
-      initOptions: {
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
-      },
-    });
-}
-
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -131,6 +115,26 @@ function initializeKeycloak(keycloak: KeycloakService) {
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 15500}},
     {provide: LOCALE_ID, useValue: "fr-FR"},// for french support
     provideHttpClient(), provideCharts(withDefaultRegisterables()), // for http requests,
+    // inject keycloack on app initialize
+    provideAppInitializer(() =>
+      {
+        const initFn = ((key: KeycloakService) => {
+          return () => key.init({
+            config: {
+              url: 'http://localhost:8080',
+              realm: 'jhispter',
+              clientId: 'web_app',
+            },
+            initOptions: {
+              onLoad: 'check-sso',
+              silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html'
+            }})
+        })(inject(KeycloakService));
+        return initFn();
+      }
+  ),
+
+    KeycloakService,
   ],
   exports: [
 
@@ -139,3 +143,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+function intializeApp1(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+
