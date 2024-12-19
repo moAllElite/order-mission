@@ -21,3 +21,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .has-text-centered{
   text-align: center;
 }
+
+.bg-success{
+  background-color:  rgb(169 208 179);
+ }
+ .bg-accent{
+  background-color: rgb(248 226 135);
+ }

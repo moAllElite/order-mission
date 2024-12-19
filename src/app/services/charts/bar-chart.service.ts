@@ -54,7 +54,7 @@ export class BarChartService {
      .loadOrdersMissions()
      .pipe(
        map((orders: OrdreMission[]) => {
-         // Filter missions with "Prevalider" status
+         // Filter missions with "valider" status
          return orders.filter(
             (order) => (order.statut === Statut.Valider
              &&
@@ -88,7 +88,24 @@ export class BarChartService {
      .loadOrdersMissions()
      .pipe(
        map((orders: OrdreMission[]) => {
-         // Filter missions with "Prevalider" status
+         // Filter missions with "valider" status
+         return orders.filter(
+            (order) => (order.statut === Statut.Valider
+             &&
+             order.salarie.direction ==='Distribution'
+           )
+         );
+       })
+     );
+    }
+
+      // get total prevalid from Transport Depart.
+  public    getTotalValidMissionDsi() :Observable<OrdreMission[]>{
+    return this.orderService
+     .loadOrdersMissions()
+     .pipe(
+       map((orders: OrdreMission[]) => {
+         // Filter missions with "valider" status
          return orders.filter(
             (order) => (order.statut === Statut.Valider
              &&

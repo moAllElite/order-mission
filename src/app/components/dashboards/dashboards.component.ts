@@ -9,7 +9,7 @@ import { LoadingSpinnerComponent } from "../widgets/loading-spinner/loading-spin
 import { MatIconModule } from '@angular/material/icon';
 import { BarChartService } from '../../services/charts/bar-chart.service';
 import { PolarAreaChartComponent } from "../widgets/polar-area-chart/polar-area-chart.component";
-import { RadarChartComponent } from "../widgets/radar-chart/radar-chart.component";
+import { LineChartComponent } from "../widgets/line-chart/line-chart.component";
 import { PaiementService } from '../../services/paiement.service';
 import { Paiement } from '../../models/paiement';
 import { Observable,map } from 'rxjs';
@@ -22,7 +22,7 @@ import { CurrencyPipe } from '@angular/common';
     DoughnutChartComponent, MatCardModule, MatIconModule,
     BarChartComponent, LoadingSpinnerComponent,
     PolarAreaChartComponent,
-    RadarChartComponent,CommonModule,CurrencyPipe
+   LineChartComponent,CommonModule,CurrencyPipe
 ],
   templateUrl: './dashboards.component.html',
   styleUrl: './dashboards.component.css'
@@ -40,7 +40,7 @@ export class DashboardsComponent implements OnInit{
     },
     100);
   }
-  //get the total amount spending 
+  //get the total amount spending annual
   getTotalSpending(){
     this.getTotalPayment().subscribe({
       next: (sum: number) => {
@@ -63,6 +63,8 @@ export class DashboardsComponent implements OnInit{
   //
   totalSpending:WritableSignal<number> =signal(0);
 
+
+  //get annual amount spending on mission
   getTotalPayment():Observable<number>{
     return this.paymentService
     .getPayments()
@@ -80,4 +82,7 @@ export class DashboardsComponent implements OnInit{
                   )
     )
   }
+
+
+
 }

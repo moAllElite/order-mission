@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RadarChartComponent } from './radar-chart.component';
+import { RadarChartComponent } from './line-chart.component';
 
 describe('RadarChartComponent', () => {
   let component: RadarChartComponent;

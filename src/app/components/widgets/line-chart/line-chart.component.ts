@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { BaseChartDirective } from 'ng2-charts';
-import { RadarChartService } from '../../../services/charts/radar-chart.service';
+import { RadarChartService } from '../../../services/charts/line-chart.service';
 /**
  * LIne chart
  */
@@ -9,10 +9,10 @@ import { RadarChartService } from '../../../services/charts/radar-chart.service'
   selector: 'app-radar-chart',
   standalone: true,
   imports:[BaseChartDirective,MatCardModule],
-  templateUrl: './radar-chart.component.html',
-  styleUrl: './radar-chart.component.css'
+  templateUrl: './line-chart.component.html',
+  styleUrl: './line-chart.component.css'
 })
-export class RadarChartComponent  implements OnInit {
+export class LineChartComponent  implements OnInit {
     // params
     labels :string[]= [];
     datasChart:any ;
@@ -25,15 +25,17 @@ export class RadarChartComponent  implements OnInit {
 
 
   ngOnInit(): void {
-    this.getData();
     this.loadRessources();
   }
 
+
+  //get all data 
 
   getData(){
     this.getStatsPaymentsDSI();
     this. getStatsPaymentsDRH();
     this.  getStatsPaymentsDistribution();
+    this.getStatsPaymentsTransport();
   }
 
   getStatsPaymentsDSI(){
@@ -64,7 +66,7 @@ export class RadarChartComponent  implements OnInit {
   //get sold payment distribution
   getStatsPaymentsDistribution(){
     this.radarChartService
-    .loadPayementDrh()
+    .loadPayementDistribution()
     .subscribe((data) => {
       this.updateChart(data,"Distribution");
     });
@@ -72,6 +74,7 @@ export class RadarChartComponent  implements OnInit {
 
   //load all parameters for polar area datasets
   loadRessources(){
+    this.getData();
     this.datasChart = {
       labels: this.labels,
     datasets: [{

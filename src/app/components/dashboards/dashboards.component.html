@@ -6,24 +6,26 @@
 
   <div class="chiffres">
      <!-- total demand mission  current month   -->
-    <mat-card >
+    <mat-card class="bg-success">
       <mat-card-header>
+        <mat-card-title> Demande</mat-card-title>
         <mat-card-subtitle>
-          Demande de  missions mois de  Décembre
+          Missions en  Décembre
         </mat-card-subtitle>
+
       </mat-card-header>
       <mat-card-content class="is-center has-text-centered">
          <h1> {{ numberOfMissionOncurrent() }}</h1>
       </mat-card-content>
     </mat-card>
     <!-- total money spends     -->
-    <mat-card >
+    <mat-card  class="bg-accent">
       <mat-card-header>
         <mat-card-title>
-          Montant total frais de mission
+          Total frais de mission annuel
         </mat-card-title>
         <mat-card-subtitle>
-          <mat-icon style=""> monetization_on</mat-icon><br/>
+          <mat-icon> monetization_on</mat-icon><br/>
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="is-center has-text-centered">
@@ -32,19 +34,16 @@
     </mat-card>
   </div>
   <div class="dashboard-widgets">
-    <!-- doughnut card-->
-    <app-doughnut-chart ></app-doughnut-chart>
-
     <!-- chart bart total about status mission--->
     <app-bar-chart></app-bar-chart>
-
-
+     <!--linear chart-->
+   <app-radar-chart></app-radar-chart>
   </div>
   <div class="dashboard-widgets">
   <!--polar area chart-->
   <app-polar-area-chart></app-polar-area-chart>
-  <!--linear chart-->
-  <app-radar-chart></app-radar-chart>
+   <!-- doughnut card-->
+   <app-doughnut-chart ></app-doughnut-chart>
   </div>
 
 

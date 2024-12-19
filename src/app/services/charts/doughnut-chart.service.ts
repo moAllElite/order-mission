@@ -10,6 +10,23 @@ export class DoughnutChartService {
 
   constructor(protected orderService:OrderMissionService) { }
 
+  // get all mission which has been prevalid
+  public    getValidMission() {
+
+    return  this.orderService
+      .loadOrdersMissions()
+      .pipe(
+        map((orders: OrdreMission[]) => {
+          // Filter missions with "valider" status
+          return orders.filter(
+             (order) => {
+               return order.statut === Statut.Valider
+             }
+          );
+        })
+      );
+
+    }
 
 
     // get all mission which has been prevalid

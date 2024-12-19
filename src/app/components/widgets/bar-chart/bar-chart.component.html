@@ -1,7 +1,7 @@
 <!-- card -->
 
 <mat-card  class="bar">
-  <mat-card-content>
+  <mat-card-content class="graph">
     <!-- bart chart graphic -->
     <canvas baseChart
       [data]="datasChart"
@@ -9,5 +9,9 @@
     > </canvas>
      <!--end bart chart graphic -->
   </mat-card-content>
+  <mat-card-footer class="has-text-centered">
+    Missions validées suivant la direction
+    <br>
+  </mat-card-footer>
 </mat-card>
 <!-- end card -->

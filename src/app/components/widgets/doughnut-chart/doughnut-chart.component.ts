@@ -29,6 +29,7 @@ export class DoughnutChartComponent implements OnInit{
     this.loadPrevalidStatics();
     this.loadRejectStats();
     this.loadMissionWaiting();
+    this.loadValidStatics();
     setTimeout(()=> this.loadRessources(),100);
 
   }
@@ -84,6 +85,18 @@ export class DoughnutChartComponent implements OnInit{
     )
   }
 
+  //get total mission which were validated
+  loadValidStatics(){
+    this.chartService.getValidMission()
+    .subscribe(
+      {
+        next: (result:OrdreMission[])=>{
+          console.log(result.length)
+           return   this.updateValue(result.length,'Missions validées')
+        }
+      }
+    );
+  }
 
   updateValue(result:number,label:string){
     this.stats.push(result);

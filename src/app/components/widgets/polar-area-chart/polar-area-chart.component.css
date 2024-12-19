@@ -1,5 +1,5 @@
-.bar{ 
-  max-width:500px;
-  margin-right: .9em;
-  margin-top: 0.9em;
+.bar{
+  max-width:1200px;
+  margin: 0.9em .9em  .9em 0 ;
+  padding-bottom: 0.9em; align-items: center;
 }

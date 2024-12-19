@@ -1,9 +1,9 @@
 .bar{
   max-width:1200px;
   min-height: 260px;
-  margin-right: .9em;
+  margin: 0 10px .5em 0;
 }
-
-.graph{
+.line{
+  max-height: 200px;
   margin-top: 10px;
 }

@@ -44,12 +44,7 @@ import {
 import {SignaturePadComponent} from './components/signature-pad/signature-pad.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { DoughnutChartComponent } from './components/widgets/doughnut-chart/doughnut-chart.component';
-import { BarChartComponent } from './components/widgets/bar-chart/bar-chart.component';
 import { SnackBarComponent } from './components/widgets/snack-bar/snack-bar.component';
-import { LoadingSpinnerComponent } from './components/widgets/loading-spinner/loading-spinner.component';
-import { PolarAreaChartComponent } from './components/widgets/polar-area-chart/polar-area-chart.component';
-import { RadarChartComponent } from './components/widgets/radar-chart/radar-chart.component';
 import { MatTabsModule } from '@angular/material/tabs';
 registerLocaleData(localeFr, 'fr');
 

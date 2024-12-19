@@ -1,9 +1,13 @@
 <mat-card  class="donut">
   <mat-card-content>
-    <canvas baseChart
+    <canvas baseChart class="has-text-centered"
       [data]="data"
       [type]="'doughnut'"
     > </canvas>
-
   </mat-card-content>
+  <mat-card-footer class="has-text-centered mb-3">
+    <br>
+    Répartition anuelles des missions par statut
+    <br/>
+  </mat-card-footer>
 </mat-card>

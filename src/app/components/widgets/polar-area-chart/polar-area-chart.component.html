@@ -3,11 +3,15 @@
 <mat-card  class="bar">
   <mat-card-content>
     <!-- bart chart graphic -->
-    <canvas baseChart
+    <canvas baseChart class="has-text-centered"
       [data]="datasChart"
       [type]="'polarArea'"
     > </canvas>
      <!--end bart chart graphic -->
   </mat-card-content>
+  <mat-card-footer class="has-text-centered">
+    <br>
+    Répartition des Frais de Missions par Mode de Transfert
+  </mat-card-footer>
 </mat-card>
 <!-- end card -->

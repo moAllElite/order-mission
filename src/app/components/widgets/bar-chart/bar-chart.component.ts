@@ -58,13 +58,26 @@ export class BarChartComponent implements OnInit {
   }
 
    // get total valid mission from DSI Depart.
-  loadTotalValidMissionTransportDRH(){
+  loadTotalValidMissionDRH(){
     this.chartService.getTotalValidMissionDRH()
      .subscribe({
         next: (data:OrdreMission[]) => {
           // Update chart data when missionsPrevalid is updated
           this.totalMissionValid.set(data.length)
           this.updateChart(data.length,'DRH');
+        }
+      });
+  }
+
+
+   // get total valid mission from DSI
+   loadTotalValidMissionDSI(){
+    this.chartService.getTotalValidMissionDRH()
+     .subscribe({
+        next: (data:OrdreMission[]) => {
+          // Update chart data when missionsPrevalid is updated
+          this.totalMissionValid.set(data.length)
+          this.updateChart(data.length,'DSI');
         }
       });
   }
@@ -80,8 +93,9 @@ export class BarChartComponent implements OnInit {
 
   loadChartRessources(){
     this.loadTotalValidMissionTransport();
-    this.loadTotalValidMissionTransportDRH();
+    this.loadTotalValidMissionDRH();
     this.loadTotalValidMissionDistribution();
+    this.loadTotalValidMissionDSI();
     this.datasChart ={
       labels: this.labels,
       datasets: [{
