@@ -12,7 +12,9 @@
           </a>
         }
         @if(order.statut === 'Prévalidé'){
-          <a  mat-raised-button color="warn" >
+          <a  mat-raised-button color="warn"
+          routerLink="/edit/valid/{{numOdm()}}"
+          >
             <mat-icon>check_circle</mat-icon>
             Validé
           </a>

@@ -34,6 +34,7 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
 
     signatureNeeded!: boolean;       //For validating the signature
     signaturePad!   : SignaturePad;  //it is used to create an instance of the SignaturePad
+    showPrevalidButton = false; // Flag to show Prevalid button
 
 
   constructor(
@@ -62,6 +63,7 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
   showSnackBar : WritableSignal<boolean> = signal(false);
 
   ngOnInit(): void {
+    this.checkRoute();//check for route and
     this.numOdm.set(this.route.snapshot.params['num_odm']);
     this.odmNumber = this.numOdm();
     this.form.controls['num_odm'].setValue(this.numOdm());
@@ -81,11 +83,19 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
 
   ngAfterViewInit(): void {
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
-}
+  }
 
 
 @ViewChild('canvas') canvasEl!: ElementRef;                          //It is used to obtain a reference to an HTML canvas element
            signatureImg       : WritableSignal<string>= signal('');  //To store the submitted signature as base64
+    // Check current route to determine which buttons to show
+    private checkRoute(): void {console.log(this.router.url);
+      console.log();
+      const road =this.router.url.split('/').includes('pre-valid');
+      if(road){
+        this.showPrevalidButton = true;
+      }
+    }
 
 
   public async getCurrentMissionOrder() {
@@ -101,8 +111,12 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
       ).subscribe();
   }
 
-  async assignValuesToForm(order: OrdreMission | null,status:Statut,image:string) {
-    this.form.controls['pre_valid'].setValue(image);
+  async assignValuesToForm(
+    order: OrdreMission | null,
+    status:Statut,imagePrevalid:string | undefined,
+    imageValid:string
+  ) {
+    this.form.controls['pre_valid'].setValue(imagePrevalid);
     this.form.controls['salarie'].setValue(order?.salarie);
     this.form.controls['id'].setValue(order?.id);
     this.form.controls['moyen_transport'].setValue(order?.moyen_transport);
@@ -111,8 +125,7 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
     this.form.controls['itineraire'].setValue(order?.itineraire);
     this.form.controls['date_fin'].setValue(order?.date_fin);
     this.form.controls['date_deb'].setValue(order?.date_deb);
-    this.form.controls['valid'].setValue('');
-
+    this.form.controls['valid'].setValue(imageValid);
     this.form.controls['statut'].setValue(status)
   }
 
@@ -136,13 +149,12 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
   icon = signal<string>('');
 
   // update the mission order after submit
-  public async onSubmit() {
-
+  public async onSubmitPrevalid() {
     setTimeout(async()=>{
      // const url = await this.saveSignatureToS3Bucket(this.signatureImg());
       //this. imageUrlFromS3.set(url ); // upload image on the AWS S3 Bucket
       console.log(this.signatureImg());
-     this.assignValuesToForm(this.ordre(),Statut.Prevalider,this.signatureImg());
+     this.assignValuesToForm(this.ordre(),Statut.Prevalider,this.signatureImg(),'');
       console.log(this.form.value)
       if (this.form.valid) {
         this.icon.set('check_circle');
@@ -155,10 +167,29 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
           this.openSnackBar('/orders');
       }
     },1000)
-
-
-
   }
+
+
+
+  // update the mission order after submit
+  public async onSubmitValid() {
+    setTimeout(async()=>{
+      console.log(this.signatureImg());
+     this.assignValuesToForm(this.ordre(),Statut.Valider,this.ordre()?.pre_valid,this.signatureImg());
+      console.log(this.form.value)
+      if (this.form.valid) {
+        this.icon.set('check_circle');
+          const c_ordre :OrdreMission = this.form.value;
+          this.ordreService.preValidateMission(this.form.controls['id'].value,c_ordre)
+          .subscribe();
+          this.clearPad();
+          this.message.set('Validation de la mission effecutée avec success');
+          this.openSnackBar('/orders');
+      }
+    },1000)
+  }
+
+
   private _snackBar = inject(MatSnackBar);
   durationInSeconds = 5;
 
@@ -176,7 +207,7 @@ export class PreValidationSignatureComponent implements OnInit ,AfterViewInit{
 
 
   onReject() {
-    this.assignValuesToForm(this.ordre(),Statut.Rejeter,'');
+    this.assignValuesToForm(this.ordre(),Statut.Rejeter,'','');
     console.log(this.form.value)
     const c_ordre :OrdreMission = this.form.value;
     this.ordreService.preValidateMission(this.form.controls['id'].value,c_ordre)

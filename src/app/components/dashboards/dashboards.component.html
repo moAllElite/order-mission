@@ -14,7 +14,7 @@
 
       </mat-card-header>
       <mat-card-content class="is-center has-text-centered">
-         <h1 style="font-size: 3em;"> {{ numberOfMissionOncurrent() }}</h1>
+        <h1 class="counter" #counter style="font-size: 3em;" > </h1>
       </mat-card-content>
     </mat-card>
     <!-- total money  spends   annually  -->
@@ -44,7 +44,7 @@
           </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="is-center has-text-centered">
-           <h1> {{ currentMonthSpending()  | currency:'XOF':'code'  }}</h1>
+           <h1 class="counter" #counter data-target="currentMonthSpending()"> {{ currentMonthSpending()  | currency:'XOF':'code'  }}</h1>
         </mat-card-content>
       </mat-card>
 

@@ -1,4 +1,4 @@
-import { Component, DEFAULT_CURRENCY_CODE, inject, OnInit, Pipe, signal, Signal, WritableSignal } from '@angular/core';
+import { AfterViewInit, Component, DEFAULT_CURRENCY_CODE,  ElementRef, inject, OnInit, Pipe, QueryList, signal, Signal, ViewChild, ViewChildren, WritableSignal } from '@angular/core';
   // for dashboards
 import { OrderMissionService } from '../../services/order-mission.service';
 import { OrdreMission } from '../../models/ordre-mission';
@@ -40,13 +40,14 @@ export class DashboardsComponent implements OnInit{
 
   ){}
   ngOnInit(): void {
-    setTimeout(()=>{
+
       this.totalMissionCurrentMonth();
       this.getTotalSpending();
       this.getTotalSpendingCurrentMonth();
       this. getTotalSpendingQuarterMonth();
-    },
-    100);
+
+    const target = this.numberOfMissionOncurrent();
+    this.animateCounter(target, this.counter.nativeElement);
   }
   //get the total amount spending annual
   getTotalSpending(){
@@ -90,7 +91,24 @@ export class DashboardsComponent implements OnInit{
       }
     );
   }
+  @ViewChild('counter', { static: true }) counter!: ElementRef;
 
 
 
+
+  animateCounter(target: number,counterElement: HTMLElement): void {
+    counterElement.innerText = '0';
+    const increment = target / 200;
+
+    const updateCounter = () => {
+      const current = +counterElement.innerText;
+      if (current < target) {
+        counterElement.innerText = `${Math.ceil(current + increment)}`;
+        setTimeout(updateCounter, 1);
+      } else {
+        counterElement.innerText = `${target}`;
+      }
+    };
+    updateCounter();
+  }
 }

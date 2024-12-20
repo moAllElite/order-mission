@@ -2,7 +2,7 @@ import { inject, LOCALE_ID, NgModule, provideAppInitializer } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardsComponent } from './components/dashboards/dashboards.component';
+import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -51,6 +51,7 @@ registerLocaleData(localeFr, 'fr');
 import Keycloak from 'keycloak-js';
 import { KeycloakService } from 'keycloak-angular';
 import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { AuthGuard } from './guards/auth.guard';
     OrderMisssionDetailComponent,
     ExpansionComponent,
     PreValidationSignatureComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +114,7 @@ import { AuthGuard } from './guards/auth.guard';
 ],
   providers: [
     provideAnimationsAsync(),
+   
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 15500}},
     {provide: LOCALE_ID, useValue: "fr-FR"},// for french support
     provideHttpClient(), provideCharts(withDefaultRegisterables()), // for http requests,

@@ -11,8 +11,13 @@
           </div>
         <!--end signature pad-->
       <div class="btns" >
-        <button mat-flat-button class="flat" type="submit" (click)="onSubmit()">Enregistrer</button>
-        <button mat-raised-button color="primary" class="flat is-red" type="button" (click)="onReject()" >Rejeter</button>
+        @if(showPrevalidButton){
+          <button mat-flat-button class="flat" type="submit" (click)="onSubmitPrevalid()">Prévalider</button>
+        }
+        @else{
+          <button mat-flat-button class="flat" type="submit" (click)="onSubmitValid()">Valider</button>
+        }
+         <button mat-raised-button color="primary" class="flat is-red" type="button" (click)="onReject()" >Rejeter</button>
         <button class="flat btn-clear"  mat-stroked-button (click)="clearPad()">Effacer</button>
       </div>
 

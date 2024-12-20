@@ -6,15 +6,18 @@
     </div>
   </div>
  <mat-list>
-   <a mat-list-item *ngFor="let item of menuItem();"
-      [routerLink]="item.route"
-      routerLinkActive
-      #routerLinkActive ="routerLinkActive"
-      [activated]="routerLinkActive.isActive"
-       class="nav-item">
-     <mat-icon matListItemIcon>  {{item.icon}}</mat-icon>
-     @if (!sideNavCollapsed()){
-       <span >{{item.label}}</span>
-     }
-   </a >
- </mat-list> 
+  @for ( item of menuItem(); track $index) {
+    <a
+        mat-list-item
+        [routerLink]="item.route"
+        routerLinkActive="active"
+         class="nav-item">
+       <mat-icon matListItemIcon>  {{item.icon}}</mat-icon>
+       @if (!sideNavCollapsed()){
+         <span   >{{item.label}}</span>
+       }
+     </a >
+  }
+
+
+ </mat-list>

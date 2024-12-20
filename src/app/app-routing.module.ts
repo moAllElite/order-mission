@@ -6,7 +6,7 @@ import {NewMissionOrderComponent} from './components/new-mission-order/new-missi
 import { OrderMisssionDetailComponent } from './components/order-misssion-detail/order-misssion-detail.component';
 import { SignaturePadComponent } from './components/signature-pad/signature-pad.component';
 
-const routes: Routes = [
+export const routes: Routes = [
  {path:'',redirectTo:'dashboard',pathMatch:'full'},
   { path: 'dashboard', component:DashboardsComponent,title:'tableau de bord' },
   {path:'orders',component:ListOrderComponent,title:'liste des missions' },
@@ -18,6 +18,11 @@ const routes: Routes = [
     children: [
       {
         path:'pre-valid/:num_odm',
+        loadChildren:() => import('./components/edit/pre-validation-signature/pre-validation-signature-routing.module')
+          .then(p=> p.PreValidationSignatureRoutingModule)
+      },
+      {
+        path:'valid/:num_odm',
         loadChildren:() => import('./components/edit/pre-validation-signature/pre-validation-signature-routing.module')
           .then(p=> p.PreValidationSignatureRoutingModule)
       }

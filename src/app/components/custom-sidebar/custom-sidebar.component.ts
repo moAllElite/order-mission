@@ -1,4 +1,4 @@
-import {Component, computed, Input, input, Signal, signal, WritableSignal} from '@angular/core';
+import {Component, computed, Input, Signal, signal, WritableSignal} from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 export type MenuItem ={
   icon:string;
